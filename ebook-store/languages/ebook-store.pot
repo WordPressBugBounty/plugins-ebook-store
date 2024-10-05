@@ -1,0 +1,1155 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-05 11:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/"
+
+#: locale.php:11
+msgid "Buy"
+msgstr ""
+
+#: locale.php:12
+msgid "Preview"
+msgstr ""
+
+#: locale.php:13
+msgid "Details"
+msgstr ""
+
+#: locale.php:14
+msgid "Download"
+msgstr ""
+
+#: locale.php:15
+msgid "pages"
+msgstr ""
+
+#: locale.php:16
+msgid ""
+"Waiting for order confirmation, this might take a minute, screen will "
+"refresh automatically!"
+msgstr ""
+
+#: locale.php:17
+msgid "Add To Cart"
+msgstr ""
+
+#: locale.php:18
+msgid "Password"
+msgstr ""
+
+#: locale.php:19
+msgid "has been added to your cart"
+msgstr ""
+
+#: locale.php:20 locale.php:31
+msgid "Pay with Card"
+msgstr ""
+
+#: ebook_options.php:120
+msgid ""
+"You have enabled email delivery, we recommend using plugin <a href=\"plugin-"
+"install.php?tab=search&s=easy+wp+smtp\">Easy WP SMTP</a> in order to make "
+"sure your WordPress emails are properly delivered."
+msgstr ""
+
+#: ebook_options.php:128
+msgid ""
+"The \"Thank You!\" page has been successfully created and selected "
+"automatically!"
+msgstr ""
+
+#: ebook_options.php:220 ebook_store_order_reports_callback.php:8
+msgid "eBook Store"
+msgstr ""
+
+#: ebook_options.php:220 functions.php:2535
+msgid "Settings"
+msgstr ""
+
+#: ebook_options.php:222 settings-PDF-Protection.php:5
+#: settings-Integrations.php:7 settings-MailChimp.php:7
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: ebook_options.php:233
+msgid "General"
+msgstr ""
+
+#: ebook_options.php:234
+msgid "Integrations"
+msgstr ""
+
+#: ebook_options.php:235
+msgid "PayPal"
+msgstr ""
+
+#: ebook_options.php:237
+msgid "Fonts"
+msgstr ""
+
+#: ebook_options.php:238
+msgid "PDF-Protection"
+msgstr ""
+
+#: ebook_options.php:239
+msgid "MailChimp"
+msgstr ""
+
+#: ebook_options.php:240
+msgid "Templates"
+msgstr ""
+
+#: ebook_options.php:242
+msgid "Coupon Code for Hosting"
+msgstr ""
+
+#: ebook_options.php:270
+msgid ""
+"allow_url_fopen php.ini setting is off, please ask your hosting provider to "
+"enable it in order to be able to use QR Code watermarking from the "
+"encryption functionality in the PRO version."
+msgstr ""
+
+#: settings-PDF-Protection.php:6 settings-Integrations.php:8
+#: settings-MailChimp.php:8
+msgid "These features are available in the Pro version, which you can find"
+msgstr ""
+
+#: settings-PDF-Protection.php:6 settings-Integrations.php:8
+#: settings-MailChimp.php:8 settings-PayPal.php:65
+msgid "here"
+msgstr ""
+
+#: settings-PDF-Protection.php:15
+msgid "Encrypt PDF Files"
+msgstr ""
+
+#: settings-PDF-Protection.php:16
+msgid ""
+"This will option will enable encrypted delivery, both via email as "
+"attachment (if enabled) and via site download. The password of the encrypted "
+"PDF file is always the buyer's PayPal email address."
+msgstr ""
+
+#: settings-PDF-Protection.php:20
+msgid "QR Code"
+msgstr ""
+
+#: settings-PDF-Protection.php:21
+msgid "see sample"
+msgstr ""
+
+#: settings-PDF-Protection.php:21
+msgid "PDF only"
+msgstr ""
+
+#: settings-PDF-Protection.php:22
+msgid ""
+"Once enabled, every page will have a QR code watermark on bottom right "
+"corner. Once scanned with any Android / iOS device it gives information for "
+"the buyer in case the file is pirated online / offline."
+msgstr ""
+
+#: settings-PDF-Protection.php:26
+msgid "Buyer Info in PDF header"
+msgstr ""
+
+#: settings-PDF-Protection.php:28
+msgid ""
+"This feature will print/watermark the buyer's information in the header of "
+"each page."
+msgstr ""
+
+#: settings-PDF-Protection.php:31
+msgid "Buyer info text"
+msgstr ""
+
+#: settings-PDF-Protection.php:38
+msgid "Use Random Password"
+msgstr ""
+
+#: settings-PDF-Protection.php:39
+msgid ""
+"If this feature is enabled, instead of using buyer's email address as PDF "
+"password, the plugin will generate a random password which will be shown in "
+"the email and thank you page template."
+msgstr ""
+
+#: settings-PDF-Protection.php:43
+msgid "Use Blank Password"
+msgstr ""
+
+#: settings-PDF-Protection.php:44
+msgid ""
+"If this feature is enabled the file will still be encrypted, but without "
+"password, which means the watermarking and print/modification will still "
+"work and the document will open without password."
+msgstr ""
+
+#: settings-PDF-Protection.php:49
+msgid "Encrypt Free Files with Logged in user's email"
+msgstr ""
+
+#: settings-PDF-Protection.php:50
+msgid ""
+"This feature enables password encryption for free files if the user is "
+"logged in. The account email address is used for the encryption process."
+msgstr ""
+
+#: settings-PDF-Protection.php:54
+msgid "PDF Master (Owner) password"
+msgstr ""
+
+#: settings-PDF-Protection.php:60
+msgid "PDF User Password"
+msgstr ""
+
+#: settings-PDF-Protection.php:61
+msgid ""
+"User password is always the PayPal email address of the buyer used when "
+"buying the PDF ebook."
+msgstr ""
+
+#: settings-PDF-Protection.php:64
+msgid "Disable PDF Printing"
+msgstr ""
+
+#: settings-PDF-Protection.php:65 settings-PDF-Protection.php:77
+msgid "This feature will disable printing for the PDF files you're selling."
+msgstr ""
+
+#: settings-PDF-Protection.php:68
+msgid "Disable Copy/Paste from PDF"
+msgstr ""
+
+#: settings-PDF-Protection.php:69
+msgid "This feature will disable copying from the PDF files you're selling."
+msgstr ""
+
+#: settings-PDF-Protection.php:72
+msgid "Disable PDF Modification"
+msgstr ""
+
+#: settings-PDF-Protection.php:73
+msgid ""
+"This feature will disable modifications for the PDF files you're selling."
+msgstr ""
+
+#: settings-PDF-Protection.php:76
+msgid "Disable Annotation forms"
+msgstr ""
+
+#: settings-PDF-Protection.php:82
+msgid "Watermark Position"
+msgstr ""
+
+#: settings-PDF-Protection.php:94
+msgid "Watermark Color"
+msgstr ""
+
+#: ebook_store.php:172 functions.php:395 functions.php:402 functions.php:825
+#: functions.php:1866
+msgid "None"
+msgstr ""
+
+#: settings-Integrations.php:16
+msgid "Integrate with WooCommerce"
+msgstr ""
+
+#: settings-Integrations.php:18
+msgid ""
+"This feature will let you assign ebook store items to your WooCommerce "
+"products which lets you benefit from the PDF protection features of the "
+"plugin but also use all payment gateways available for WooCommerce."
+msgstr ""
+
+#: settings-Integrations.php:18
+msgid "See video demo of WooCommerce integration"
+msgstr ""
+
+#: settings-Integrations.php:23
+msgid "Hide WooCommerce Added To Cart Message"
+msgstr ""
+
+#: settings-Integrations.php:30
+msgid "Require specific order status in WooCommerce for Downloads"
+msgstr ""
+
+#: settings-Integrations.php:59
+msgid "WooCommerce - Enable Online Reader"
+msgstr ""
+
+#: settings-Integrations.php:61
+msgid ""
+"This will add a \"Read Online\" link to your WooCommerce order confirmation "
+"page so customers can read the ebook online instead of downloading it. "
+"Encryption must be off for JavaScript to be able to parse your PDF file."
+msgstr ""
+
+#: settings-Integrations.php:65
+msgid "Disable Auto refresh if the encryption is still in progress."
+msgstr ""
+
+#: settings-Integrations.php:67
+msgid ""
+"If you experience multiple downloads starting at once after encryption of "
+"large files, enable this feature to resolve the problem. It will show a "
+"retry download link instead of doing automated refresh."
+msgstr ""
+
+#: settings-Integrations.php:71
+msgid "Integrate with WP Affiliates Manager"
+msgstr ""
+
+#: settings-Integrations.php:73
+msgid "Enable integration with"
+msgstr ""
+
+#: settings-Integrations.php:73
+msgid "and pay commissions to affiliates that promote your ebook"
+msgstr ""
+
+#: settings-Integrations.php:78
+msgid "Fill a form upon order"
+msgstr ""
+
+#: settings-Integrations.php:80
+msgid ""
+"If this feature is enabled the user will be asked to fill in a form with "
+"more details, the form you can edit as you wish with your own html editor "
+"and paste the code on this page's section with the form content."
+msgstr ""
+
+#: settings-Integrations.php:83
+msgid "Disable cover clicking"
+msgstr ""
+
+#: settings-Integrations.php:85
+msgid ""
+"This can be enabled in combination with the option below, to prevent "
+"standalone orders and use only WooCommerce cart."
+msgstr ""
+
+#: settings-Integrations.php:89
+msgid "Hide Buy Now button"
+msgstr ""
+
+#: settings-Integrations.php:91
+msgid ""
+"This feature is useful when WooCommerce integration is used and you want to "
+"disallow standalone orders"
+msgstr ""
+
+#: settings-Integrations.php:95
+msgid "Require @kindle.com email for delivery"
+msgstr ""
+
+#: settings-Integrations.php:97
+msgid ""
+"You can use that with combination of \"Fill a form feature\" to get the "
+"kindle email of the user (use field name \"kindle_email\")."
+msgstr ""
+
+#: settings-Integrations.php:101
+msgid "Read online and disallow download"
+msgstr ""
+
+#: settings-Integrations.php:103
+#, php-format
+msgid ""
+"Use %%pdf_reader%% in Thank You page body to activate it. The keyword will "
+"be replaced with a PDF Viewer instead. See <a href=\"http://viewerjs.org\" "
+"target=\"_blank\">DEMO</a> here."
+msgstr ""
+
+#: settings-Integrations.php:107
+msgid "Auto register buyers"
+msgstr ""
+
+#: settings-Integrations.php:109
+msgid ""
+"Once the customers complete payment for your ebook, a new account will be "
+"created for them and order will be assigned to their account so they can "
+"access it under Downloads page."
+msgstr ""
+
+#: settings-Integrations.php:112
+msgid "Disable ViewerJS for previews"
+msgstr ""
+
+#: settings-Integrations.php:114
+msgid ""
+"If your preview files have troubles with embedded links when customers are "
+"browsing the previews file, this will turn it off."
+msgstr ""
+
+#: settings-Templates.php:4
+msgid "Thank You page"
+msgstr ""
+
+#: settings-Templates.php:24
+msgid ""
+"This page should contain the shortcode <b>[ebook_thank_you]</b>, where you "
+"want the \"Thank you\" page content to appear."
+msgstr ""
+
+#: settings-Templates.php:30
+msgid "Order Cancelled Page"
+msgstr ""
+
+#: settings-Templates.php:50
+msgid ""
+"This page will be shown if the customer decides to cancel the order at "
+"PayPal."
+msgstr ""
+
+#: settings-Templates.php:57
+msgid "Thank you page Content"
+msgstr ""
+
+#: settings-Templates.php:66
+msgid "Email delivery content"
+msgstr ""
+
+#: settings-Templates.php:67
+msgid "Subject"
+msgstr ""
+
+#: settings-Templates.php:73
+msgid "Form Content"
+msgstr ""
+
+#: ebook_store_add_order_page_callback.php:16 functions.php:2507
+#: functions.php:2508
+msgid "Orders - Add New"
+msgstr ""
+
+#: ebook_store_add_order_page_callback.php:21
+msgid "First Name"
+msgstr ""
+
+#: ebook_store_add_order_page_callback.php:26
+msgid "Last Name"
+msgstr ""
+
+#: ebook_store_add_order_page_callback.php:31
+msgid "Amount Paid"
+msgstr ""
+
+#: ebook_store_add_order_page_callback.php:37
+#: ebook_store_add_issue_page_callback.php:244
+msgid "Select Ebook"
+msgstr ""
+
+#: ebook_store_add_order_page_callback.php:43
+msgid "Buyer Email"
+msgstr ""
+
+#: ebook_store_add_order_page_callback.php:45
+msgid ""
+"The buyer will be now send a thank you email with the appropriate download "
+"links for the ebook and it's formats."
+msgstr ""
+
+#: ebook_store_add_order_page_callback.php:49
+msgid ""
+"\"Thank you\" email will be sent immediately with the download links for the "
+"ebook. If encryption is enabled, the file will be encrypted."
+msgstr ""
+
+#: settings-Hosting.php:6
+msgid "Hide this section"
+msgstr ""
+
+#: settings-Hosting.php:8
+msgid ""
+"If you are not interested just check this box and you will never see this "
+"section again."
+msgstr ""
+
+#: settings-Fonts.php:5
+msgid "Ebook Title Font Size"
+msgstr ""
+
+#: settings-Fonts.php:24
+msgid "Links Font Size"
+msgstr ""
+
+#: ebook_store_order_reports_callback.php:10
+msgid "Export as CSV"
+msgstr ""
+
+#: ebook_store_order_reports_callback.php:38
+msgid "Sales for the last month"
+msgstr ""
+
+#: ebook_store_order_reports_callback.php:76
+msgid "Sales for the last 2 years"
+msgstr ""
+
+#: settings-General.php:8
+msgid ""
+"If you own the PRO version you can also enable Ebook Store to work with "
+"WooCommerce via the <a href=\"options-general.php?page=ebook_options."
+"php&tab=Integrations\">Integrations</a> page. See <a target=\"_blank\" "
+"href=\"https://www.youtube.com/watch?v=kaEKQ0yTaWA\">video demo</a>. <br />"
+msgstr ""
+
+#: settings-General.php:10
+msgid "Thank you for choosing the full version of Ebook Store!"
+msgstr ""
+
+#: settings-General.php:17
+msgid "License key"
+msgstr ""
+
+#: settings-General.php:18
+msgid ""
+"If you purchased the full version of the plugin, just fill in your PayPal "
+"email used when ordering and you will be able to unlock the pro features and "
+"keep them active after updating."
+msgstr ""
+
+#: settings-General.php:24
+msgid "Frontend Language"
+msgstr ""
+
+#: settings-General.php:38
+msgid ""
+"You can enforce language for the frontend in case you do not want to use the "
+"default one inherited from WordPress."
+msgstr ""
+
+#: settings-General.php:44
+msgid "Link Expiration"
+msgstr ""
+
+#: settings-General.php:46
+msgid ""
+"How long the link will remain active, possible formats are for example \"1 "
+"year\", \"12 months\", \"120 days\", \"168 hours\" etc."
+msgstr ""
+
+#: settings-General.php:52
+msgid "Downloads limit"
+msgstr ""
+
+#: settings-General.php:54
+msgid "After how many successful downloads (per order) link becomes inactive"
+msgstr ""
+
+#: settings-General.php:59
+msgid "Email Delivery"
+msgstr ""
+
+#: settings-General.php:61
+msgid ""
+"Send e-mails to customers containing order details, download link with all "
+"formats and a backup copy of the purchased ebook."
+msgstr ""
+
+#: settings-General.php:66
+msgid "Attach Files"
+msgstr ""
+
+#: settings-General.php:68
+msgid ""
+"Add a copy of the purchased ebook as an attachment to the e-mail delivery e-"
+"mail message."
+msgstr ""
+
+#: settings-General.php:74
+msgid "VAT Percent"
+msgstr ""
+
+#: settings-General.php:76
+msgid "Specify VAT Percentage if you want to use VAT. Use \"20\" for 20%."
+msgstr ""
+
+#: settings-General.php:82
+msgid "Form Size (Scale ratio)"
+msgstr ""
+
+#: settings-General.php:97
+#, php-format
+msgid ""
+"If you want to scale the form and make it bigger you can use this setting. "
+"Example: Ratio 1.10 makes the form 10% bigger."
+msgstr ""
+
+#: functions.php:26
+msgctxt "post type general name"
+msgid "Ebook Store"
+msgstr ""
+
+#: functions.php:27
+msgctxt "post type singular name"
+msgid "Ebook"
+msgstr ""
+
+#: functions.php:28
+msgctxt "ebook"
+msgid "Add New Ebook"
+msgstr ""
+
+#: functions.php:29
+msgid "Add New Ebook Item"
+msgstr ""
+
+#: functions.php:30
+msgid "Edit Item"
+msgstr ""
+
+#: functions.php:31
+msgid "Ebooks"
+msgstr ""
+
+#: functions.php:32
+msgid "New Ebook Item"
+msgstr ""
+
+#: functions.php:33
+msgid "View Ebook Item"
+msgstr ""
+
+#: functions.php:34
+msgid "Search Ebook"
+msgstr ""
+
+#: functions.php:35
+msgid "Nothing found"
+msgstr ""
+
+#: functions.php:36
+msgid "Nothing found in Trash"
+msgstr ""
+
+#: functions.php:61 functions.php:67 functions.php:73
+msgid "Authors"
+msgstr ""
+
+#: functions.php:62 functions.php:394
+msgid "Author"
+msgstr ""
+
+#: functions.php:63 functions.php:97 functions.php:129
+msgid "Add New"
+msgstr ""
+
+#: functions.php:64
+msgid "Add New Author"
+msgstr ""
+
+#: functions.php:65
+msgid "Edit Author"
+msgstr ""
+
+#: functions.php:66
+msgid "New Author"
+msgstr ""
+
+#: functions.php:68
+msgid "View Author"
+msgstr ""
+
+#: functions.php:69
+msgid "Search Author"
+msgstr ""
+
+#: functions.php:70
+msgid "No authors found"
+msgstr ""
+
+#: functions.php:71
+msgid "No authors found in Trash"
+msgstr ""
+
+#: functions.php:95 functions.php:101 functions.php:107
+msgid "Publishers"
+msgstr ""
+
+#: functions.php:96 functions.php:401
+msgid "Publisher"
+msgstr ""
+
+#: functions.php:98
+msgid "Add New Publisher"
+msgstr ""
+
+#: functions.php:99
+msgid "Edit Publisher"
+msgstr ""
+
+#: functions.php:100
+msgid "New Publisher"
+msgstr ""
+
+#: functions.php:102
+msgid "View Publisher"
+msgstr ""
+
+#: functions.php:103
+msgid "Search Publisher"
+msgstr ""
+
+#: functions.php:104
+msgid "No Publishers found"
+msgstr ""
+
+#: functions.php:105
+msgid "No Publishers found in Trash"
+msgstr ""
+
+#: functions.php:127 functions.php:133 functions.php:139
+msgid "Orders"
+msgstr ""
+
+#: functions.php:128 functions.php:3538
+msgid "Order"
+msgstr ""
+
+#: functions.php:131
+msgid "Edit Order"
+msgstr ""
+
+#: functions.php:132
+msgid "New Order"
+msgstr ""
+
+#: functions.php:134
+msgid "View Order Details"
+msgstr ""
+
+#: functions.php:135
+msgid "Search Order"
+msgstr ""
+
+#: functions.php:136
+msgid "No orders found"
+msgstr ""
+
+#: functions.php:137
+msgid "No orders found in Trash"
+msgstr ""
+
+#: functions.php:177
+msgid "Ebook Details"
+msgstr ""
+
+#: functions.php:184
+msgid "Ebook Store - Click on Ebook to embed it"
+msgstr ""
+
+#: functions.php:191
+msgid "Ebook Store - Click Ebook to Embed"
+msgstr ""
+
+#: functions.php:255
+msgid ""
+"Copy and paste this code in your post or page where you want the order form "
+"to appear."
+msgstr ""
+
+#: functions.php:363
+msgid ""
+"Copy and paste this code in your post or page where you want the order form "
+"to appear"
+msgstr ""
+
+#: functions.php:375
+msgid "Please note the max upload size set on this server is"
+msgstr ""
+
+#: functions.php:385
+msgid "Cover Image"
+msgstr ""
+
+#: functions.php:385 functions.php:387 functions.php:391 functions.php:394
+#: functions.php:401 functions.php:405 functions.php:406
+msgid "optional"
+msgstr ""
+
+#: functions.php:385 functions.php:391
+msgid "recommended"
+msgstr ""
+
+#: functions.php:387
+msgid "Ebook Preview"
+msgstr ""
+
+#: functions.php:391
+msgid "Side Image"
+msgstr ""
+
+#: functions.php:391
+msgid "Currently uploaded"
+msgstr ""
+
+#: functions.php:400 functions.php:2101
+msgid "Price"
+msgstr ""
+
+#: functions.php:405 functions.php:2100
+msgid "Date"
+msgstr ""
+
+#: functions.php:408
+msgid "Currency"
+msgstr ""
+
+#: functions.php:415
+msgid "Bonus ebook"
+msgstr ""
+
+#: functions.php:425
+msgid "Paid or free download"
+msgstr ""
+
+#: functions.php:426
+msgid "Paid download"
+msgstr ""
+
+#: functions.php:426
+msgid ""
+"Order is placed through PayPal and the user is returned to the site for "
+"downloading the product. Email delivery routine will be triggered."
+msgstr ""
+
+#: functions.php:427
+msgid "Allow free download"
+msgstr ""
+
+#: functions.php:427
+msgid "User is not sent to PayPal, download starts directly"
+msgstr ""
+
+#: functions.php:428
+msgid "Donate to download"
+msgstr ""
+
+#: functions.php:428
+msgid "User can set a price for the ebook once it lands on PayPal."
+msgstr ""
+
+#: functions.php:2040
+msgid ""
+"Your hosting provide is missing GD PNG support, please contact your provider "
+"to enable GD in order to be able to process PNG files."
+msgstr ""
+
+#: functions.php:2047
+msgid ""
+"You need to create a \"Thank you\" landing page with the text/shortcode "
+"<input type=\"text\" size=20 value=\"[ebook_thank_you]\" />, where you want "
+"the \"Thank You\" page content to appear, then select that page in Ebook "
+"Store options under Settings menu.\n"
+"<br />\n"
+"<p class=\"submit\"><input type=\"button\" name=\"button\" id=\"button\" "
+"class=\"button button-primary\" value=\"Fix automatically\" onClick=\"window."
+"location = 'options-general.php?page=ebook_options.php&task=fixThankYouPage';"
+"\"></p>\n"
+"        "
+msgstr ""
+
+#: functions.php:2096
+msgid "Cover"
+msgstr ""
+
+#: functions.php:2097
+msgid "Book Title"
+msgstr ""
+
+#: functions.php:2102
+msgid "Formats"
+msgstr ""
+
+#: functions.php:2103
+msgid "Sales"
+msgstr ""
+
+#: functions.php:2104
+msgid "Embed Code for posts and pages"
+msgstr ""
+
+#: functions.php:2118
+msgid "Direct Order Link"
+msgstr ""
+
+#: functions.php:2129
+msgid "Total"
+msgstr ""
+
+#: functions.php:2129
+msgid "7 Days"
+msgstr ""
+
+#: functions.php:2129
+msgid "30 Days"
+msgstr ""
+
+#: functions.php:2516 functions.php:2517
+msgid "Orders - Reports"
+msgstr ""
+
+#: functions.php:2525 functions.php:2526
+msgid "Orders - New Issue"
+msgstr ""
+
+#: functions.php:2658
+msgid ""
+"Order has been generated and email was sent to the buyer!<br /><small>If "
+"your email has not arrived, we strongly recommend using Easy WP SMTP to send "
+"emails trough a service like Gmail to ensure inbox delivery.</small>"
+msgstr ""
+
+#: functions.php:3196
+msgctxt "Ebook Categories"
+msgid "Ebook Categories"
+msgstr ""
+
+#: functions.php:3197
+msgctxt "Ebook Category"
+msgid "Ebook Category"
+msgstr ""
+
+#: functions.php:3198
+msgid "Search Ebook Categories"
+msgstr ""
+
+#: functions.php:3199
+msgid "All Ebook Categories"
+msgstr ""
+
+#: functions.php:3200
+msgid "Parent Ebook Category"
+msgstr ""
+
+#: functions.php:3201
+msgid "Parent Ebook Category:"
+msgstr ""
+
+#: functions.php:3202
+msgid "Edit Ebook Category"
+msgstr ""
+
+#: functions.php:3203
+msgid "Update Ebook Category"
+msgstr ""
+
+#: functions.php:3204
+msgid "Add New Ebook Category"
+msgstr ""
+
+#: functions.php:3205
+msgid "New Ebook Category"
+msgstr ""
+
+#: functions.php:3206
+msgid "Ebook Categories"
+msgstr ""
+
+#: functions.php:3238 ebook_store_add_issue_page_callback.php:27
+msgid "Ebook Store"
+msgstr ""
+
+#: functions.php:3359
+msgid "There must be orders first."
+msgstr ""
+
+#: functions.php:3412
+msgid ""
+"This file is can not be encrypted. Please save it in Adobe Acrobat 5.0 PDF 1."
+"5 compatibility format. See video tutorial here: <a href=\"https://youtu.be/-"
+"yDr-76W4gk\" target=\"_blank\">https://youtu.be/-yDr-76W4gk</a>"
+msgstr ""
+
+#: functions.php:3547
+msgid "Online Viewer"
+msgstr ""
+
+#: functions.php:3584
+msgid "Product"
+msgstr ""
+
+#: functions.php:3585
+msgid "Download Links"
+msgstr ""
+
+#: functions.php:3586
+msgid "Expires"
+msgstr ""
+
+#: functions.php:3587
+msgid "File"
+msgstr ""
+
+#: ebook_store_add_issue_page_callback.php:27
+msgid "Sending new issue for"
+msgstr ""
+
+#: ebook_store_add_issue_page_callback.php:27
+msgid "orders matching the criteria"
+msgstr ""
+
+#: ebook_store_add_issue_page_callback.php:50
+msgid "Adding a new order for order id"
+msgstr ""
+
+#: ebook_store_add_issue_page_callback.php:227
+msgid "Records found"
+msgstr ""
+
+#: ebook_store_add_issue_page_callback.php:232
+msgid "Orders - Add New Issue"
+msgstr ""
+
+#: ebook_store_add_issue_page_callback.php:233
+msgid ""
+"This feature will generate new orders and allow people who previously "
+"purchased a certain ebook to download the new issue. Like a magazine "
+"subscription. <br /><b>Use the purchase period field to enter the period "
+"back in time for which the orders will be processed. If you set it for 1 "
+"year, only orders placed in the last year will be processed and customers "
+"will be sent the new issue / version of the magazine / book.</b>"
+msgstr ""
+
+#: ebook_store_add_issue_page_callback.php:268
+msgid "Select Ebook (new Issue)"
+msgstr ""
+
+#: ebook_store_add_issue_page_callback.php:292
+msgid "Purchase Period"
+msgstr ""
+
+#: ebook_store_add_issue_page_callback.php:313
+msgid "Send New Issue To Customers"
+msgstr ""
+
+#: settings-MailChimp.php:19
+msgid "Get it from"
+msgstr ""
+
+#: settings-MailChimp.php:23
+msgid "Subscribe buyers to MailChimp list"
+msgstr ""
+
+#: settings-PayPal.php:4
+msgid "PayPal account"
+msgstr ""
+
+#: settings-PayPal.php:6
+msgid "Enter the e-mail of the PayPal account that will receive the payments."
+msgstr ""
+
+#: settings-PayPal.php:8
+msgid ""
+"enable PayPal IPN in your PayPal account</a>. That's under Profile > My "
+"selling tools > Instant payment notifications. In the IPN url field enter "
+"your website address."
+msgstr ""
+
+#: settings-PayPal.php:12
+msgid "PayPal currency"
+msgstr ""
+
+#: settings-PayPal.php:30
+msgid "PayPal language"
+msgstr ""
+
+#: settings-PayPal.php:48
+msgid "PayPal Return to site button text"
+msgstr ""
+
+#: settings-PayPal.php:52
+msgid "test mode"
+msgstr ""
+
+#: settings-PayPal.php:54
+msgid ""
+"Sandbox mode allows you to test without using real money, keep in mind that "
+"PayPal often delays the sandbox transactions IPN resulting in an infinity-"
+"loop like behaviour while waiting for order confirmation."
+msgstr ""
+
+#: settings-PayPal.php:56
+msgid ""
+"Please note that sandbox account logins are different from PayPal live mode "
+"and you must create accounts there too and enable PayPal IPN."
+msgstr ""
+
+#: settings-PayPal.php:56
+msgid ""
+"​Sign up for a developer account <a href=\"https://developer.paypal."
+"com/developer/accounts/\" target=\"_blank\">here</a>."
+msgstr ""
+
+#: settings-PayPal.php:63
+msgid "Allow eCheck via PayPal"
+msgstr ""
+
+#: settings-PayPal.php:65
+msgid ""
+"This will enable users paying with eCheck via PayPal that takes days or up "
+"to a week to clear download before the actual payment arrives in your "
+"account. For more info on eCheck click"
+msgstr ""
+
+#: settings-PayPal.php:70
+msgid "PayPal Transaction Verification"
+msgstr ""
+
+#: settings-PayPal.php:72
+msgid "turn off if experiencing problems"
+msgstr ""
+
+#: settings-PayPal.php:77
+msgid "Ask buyer for address at PayPal"
+msgstr ""
+
+#: settings-PayPal.php:78
+msgid "Optional"
+msgstr ""
+
+#: settings-PayPal.php:78
+msgid "Do not require address"
+msgstr ""
+
+#: settings-PayPal.php:78
+msgid "Require Address"
+msgstr ""
+
+#. Name of the plugin
+msgid "eBook store"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"eBook Store is a unique and powerful standalone tool for selling ebooks with "
+"WordPress (also WooCommerce support is available), allowing you to display "
+"beautiful buy now forms for your ebook(s) and giving you the ability to "
+"offer encrypted, watermarked and QR code stamped ebooks to your buyers, a "
+"proven way to prevent piracy. With the built-in MailChimp integration you "
+"can directly subscribe your clients to a mailing list. It supports PDF, ePub,"
+" TXT, Mobi and Zip files. Now comes with WP Affiliates Manager integration "
+"so you can pay commissions to affiliates for promoting your ebook."
+msgstr ""
+
+#. URI of the plugin
+#. Author URI of the plugin
+msgid "https://www.shopfiles.com/index.php/products/wordpress-ebook-store"
+msgstr ""
+
+#. Author of the plugin
+msgid "Shopfiles Ltd"
+msgstr ""

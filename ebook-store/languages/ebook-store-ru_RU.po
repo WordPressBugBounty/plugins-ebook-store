@@ -1,0 +1,837 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: eBook store\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-18 21:03+0000\n"
+"PO-Revision-Date: 2017-01-18 21:09+0000\n"
+"Last-Translator: admin <deian@motov.net>\n"
+"Language-Team: Danish\n"
+"Language: da-DK\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco - https://localise.biz/"
+
+#: settings-General.php:4
+msgid "License key"
+msgstr "Лицензионный ключ"
+
+#: settings-General.php:5
+msgid ""
+"If you purchased the full version of the plugin, just fill in your PayPal "
+"email used when ordering and you will be able to unlock the pro features and "
+"keep them active after updating."
+msgstr "Если вы приобрели полную версию плагина, просто введите свой адрес электронной почты PayPal используется при заказе и вы сможете разблокировать про особенности и держать их активными после обновления."
+
+#: settings-General.php:9
+msgid "PayPal account"
+msgstr "Счет PayPal"
+
+#: settings-General.php:10
+msgid ""
+"enable PayPal IPN in your PayPal account</a>. That's under Profile > My "
+"selling tools > Instant payment notifications. In the IPN url field enter "
+"your website address."
+msgstr "включить PayPal IPN в вашей учетной записи PayPal </a>. Это под профиль> Мои продажи инструменты> Мгновенные уведомления об оплате. В поле URL-адрес IPN введите свой адрес веб-сайта."
+
+#: settings-General.php:14
+msgid "Frontend Language"
+msgstr "Frontend Язык"
+
+#: settings-General.php:32
+msgid "Upgrade to Pro"
+msgstr "Обновиться до Pro"
+
+#: settings-General.php:33
+msgid "These features are available in the Pro version, which you can find"
+msgstr "Эти функции доступны в Pro версии, которую вы можете найти"
+
+#: settings-General.php:33 settings-PayPal.php:53
+msgid "here"
+msgstr "Вот..."
+
+#: settings-General.php:41
+msgid "Link Expiration"
+msgstr "Ссылка Действительно"
+
+#: settings-General.php:47
+msgid "Downloads limit"
+msgstr "Ограничение Загрузки"
+
+#: settings-General.php:47
+msgid "after how many succesful downloads link becomes inactive"
+msgstr "после того, как много успешных загрузок ссылка становится неактивной"
+
+#: settings-General.php:52
+msgid "Email Delivery"
+msgstr "E-mail доставки"
+
+#: settings-General.php:57
+msgid "Attach Files"
+msgstr "Прикрепить файлы"
+
+#: settings-General.php:63
+msgid "VAT Percent"
+msgstr "Процент НДС"
+
+#: settings-Templates.php:4
+msgid "Thank You page"
+msgstr "страница "спасибо""
+
+#: settings-Templates.php:24
+msgid ""
+"This page should contain the shortcode <b>[ebook_thank_you]</b>, where you "
+"want the \"Thank you\" page content to appear."
+msgstr "Эта страница должна содержать шорткод <B> [ebook_thank_you] </ b>, где вы хотите \ "Спасибо \" содержимое страницы, чтобы появиться."
+
+#: settings-Templates.php:30
+msgid "Order Cancelled Page"
+msgstr "Заказ отменен Страница"
+
+#: settings-Templates.php:50
+msgid ""
+"This page will be shown if the customer decides to cancel the order at "
+"PayPal."
+msgstr "Эта страница будет отображаться, если клиент решает отменить заказ в PayPal."
+
+#: settings-Templates.php:57
+msgid "Thank you page"
+msgstr "страница "спасибо""
+
+#: settings-Templates.php:67
+msgid "Subject"
+msgstr "Тема"
+
+#: settings-Templates.php:73
+msgid "Form Content"
+msgstr "Форма Содержание"
+
+#: locale.php:9
+msgid "Buy"
+msgstr "Купить"
+
+#: locale.php:10
+msgid "Preview"
+msgstr "Обзор"
+
+#: locale.php:11
+msgid "Details"
+msgstr "Детали"
+
+#: locale.php:12
+msgid "Download"
+msgstr "Скачать"
+
+#: locale.php:13
+msgid "pages"
+msgstr "стр."
+
+#: locale.php:14
+msgid ""
+"Waiting for order confirmation, this might take a minute, screen will "
+"refresh automatically!"
+msgstr "Ожидание подтверждения заказа, это может занять минуту, экран будет автоматически обновляться!"
+
+#: locale.php:15
+msgid "Add To Cart"
+msgstr "Добавить в корзину"
+
+#: locale.php:16
+msgid "Password"
+msgstr "Пароль"
+
+#: locale.php:17
+msgid "has been added to your cart"
+msgstr "был добавлен в корзину"
+
+#: settings-Integrations.php:4
+msgid "Integrate with WooCommerce"
+msgstr "Интеграция с WooCommerce"
+
+#: settings-Integrations.php:6
+msgid ""
+"This feature will let you assign ebook store items to your WooCommerce "
+"products which lets you benefit from the PDF protection features of the "
+"plugin but also use all payment gateways available for WooCommerce."
+msgstr "Эта функция позволит вам назначить электронную книгу магазина товаров для ваших продуктов WooCommerce, который позволяет получать преимущества от функций защиты PDF плагина, но и использовать все шлюзы оплаты доступны для WooCommerce."
+
+#: settings-Integrations.php:6
+msgid "See video demo of WooCommerce integration"
+msgstr "Смотрите видео демонстрацию интеграции WooCommerce"
+
+#: settings-Integrations.php:11
+msgid "Integrate with WP Affiliates Manager"
+msgstr "Интеграция с WP Партнеры диспетчера"
+
+#: settings-Integrations.php:13
+msgid "Enable integration with"
+msgstr "Включить интеграцию с"
+
+#: settings-Integrations.php:13
+msgid "and pay commissions to affiliates that promote your ebook"
+msgstr "и платить комиссионные филиалов, которые продвигают вашу книгу"
+
+#: settings-Integrations.php:18
+msgid "Fill a form upon order"
+msgstr "Заполните форму на заказ"
+
+#: settings-Integrations.php:20
+msgid ""
+"If this feature is enabled the user will be asked to fill in a form with "
+"more details, the form you can edit as you wish with your own html editor "
+"and paste the code on this page's section with the form content."
+msgstr "Если эта функция включена пользователю будет предложено заполнить форму с большим количеством деталей, форму можно редактировать, как вы хотите с вашим собственным HTML редактор и вставить код в разделе этой страницы с содержанием формы."
+
+#: settings-Integrations.php:23
+msgid "Require @kindle.com email for delivery"
+msgstr "Требовать @ kindle.com электронной почты для доставки"
+
+#: settings-Integrations.php:25
+msgid ""
+"You can use that with combination of \"Fill a form feature\" to get the "
+"kindle email of the user (use field name \"kindle_email\")."
+msgstr "Вы можете использовать это с комбинацией \ "заполнить форму функции \", чтобы получить разжигать письмо от (имя использование поля \ "kindle_email \") пользователя."
+
+#: settings-PayPal.php:4
+msgid "PayPal currency"
+msgstr "валюта PayPal"
+
+#: settings-PayPal.php:22
+msgid "PayPal language"
+msgstr "PayPal язык"
+
+#: settings-PayPal.php:40
+msgid "PayPal Return to site button text"
+msgstr "PayPal Кнопка Возврат к тексту сайта"
+
+#: settings-PayPal.php:44
+msgid "test mode"
+msgstr "Режим испытания"
+
+#: settings-PayPal.php:46
+msgid ""
+"Sandbox mode allows you to test without using real money, keep in mind that "
+"PayPal often delyas the sandbox transactions IPN resulting in an infinity-"
+"loop like behaviour while waiting for order confirmation."
+msgstr "Изолированный режим позволяет проверить, не используя реальные деньги, имейте в виду, что PayPal часто delyas транзакции песочницы IPN что приводит к бесконечности петли, как поведение во время ожидания подтверждения заказа."
+
+#: settings-PayPal.php:51
+msgid "Allow eCheck via PayPal"
+msgstr "Разрешить Echeck с помощью PayPal"
+
+#: settings-PayPal.php:53
+msgid ""
+"This will enable users paying with eCheck via PayPal that takes days or up "
+"to a week to clear download before the actual payment arrives in your "
+"account. For more info on eCheck click"
+msgstr "Это позволит пользователям платить с Echeck через PayPal, который принимает дней или до недели, чтобы очистить загрузки до фактического платежа поступает в вашем аккаунте. Для получения дополнительной информации о Echeck нажмите"
+
+#: settings-PayPal.php:58
+msgid "PayPal Transaction Verification"
+msgstr "PayPal Контроль транзакций"
+
+#: settings-PayPal.php:60
+msgid "turn off if experiencing problems"
+msgstr "отключить, если возникли проблемы"
+
+#: settings-PayPal.php:65
+msgid "Ask buyer for address at PayPal"
+msgstr "Спросите покупателя на адрес в PayPal"
+
+#: settings-PayPal.php:66
+msgid "Optional"
+msgstr "Необязательно"
+
+#: settings-PayPal.php:66
+msgid "Do not require address"
+msgstr "Не требуется адрес"
+
+#: settings-PayPal.php:66
+msgid "Require Address"
+msgstr "Требовать Адрес"
+
+#: ebook_options.php:191 functions.php:2134
+msgid "Settings"
+msgstr "Настройки"
+
+#: ebook_options.php:199
+msgid "General"
+msgstr "Генерал"
+
+#: ebook_options.php:200
+msgid "Integrations"
+msgstr "Интеграции"
+
+#: ebook_options.php:201
+msgid "PayPal"
+msgstr "PayPal"
+
+#: ebook_options.php:202
+msgid "Fonts"
+msgstr "Шрифты"
+
+#: ebook_options.php:203
+msgid "PDF-Protection"
+msgstr "PDF-защиты"
+
+#: ebook_options.php:204
+msgid "MailChimp"
+msgstr "MailChimp"
+
+#: ebook_options.php:205
+msgid "Templates"
+msgstr "Шаблоны"
+
+#: functions.php:22
+msgctxt "post type general name"
+msgid "eBook Store"
+msgstr "электронная книга магазин"
+
+#: functions.php:23
+msgctxt "post type singular name"
+msgid "eBook"
+msgstr "электронная книга"
+
+#: functions.php:24
+msgctxt "ebook"
+msgid "Add New eBook"
+msgstr "Добавить книгу"
+
+#: functions.php:25
+msgid "Add New eBook Item"
+msgstr "Добавить электронную книгу Пункт"
+
+#: functions.php:26
+msgid "Edit Item"
+msgstr "Редактировать пункт"
+
+#: functions.php:27
+msgid "eBooks"
+msgstr "Электронных книг:"
+
+#: functions.php:28
+msgid "New Ebook Item"
+msgstr "Новая электронная книга Пункт"
+
+#: functions.php:29
+msgid "View Ebook Item"
+msgstr "Просмотр электронных книг товара"
+
+#: functions.php:30
+msgid "Search Ebook"
+msgstr "Поиск электронных книг"
+
+#: functions.php:31
+msgid "Nothing found"
+msgstr "Ничего не найдено"
+
+#: functions.php:32
+msgid "Nothing found in Trash"
+msgstr "Ничего не найдено в Корзине"
+
+#: functions.php:57 functions.php:63 functions.php:69
+msgid "Authors"
+msgstr "Авторы"
+
+#: functions.php:58 functions.php:407
+msgid "Author"
+msgstr "Автор"
+
+#: functions.php:59 functions.php:93 functions.php:125
+msgid "Add New"
+msgstr "Добавить новые"
+
+#: functions.php:60
+msgid "Add New Author"
+msgstr "Добавить Автор"
+
+#: functions.php:61
+msgid "Edit Author"
+msgstr "Редактировать Автор"
+
+#: functions.php:62
+msgid "New Author"
+msgstr "Новый Автор"
+
+#: functions.php:64
+msgid "View Author"
+msgstr "Просмотр Автор"
+
+#: functions.php:65
+msgid "Search Author"
+msgstr "Поиск по автору"
+
+#: functions.php:66
+msgid "No authors found"
+msgstr "Авторы записей не найдено"
+
+#: functions.php:67
+msgid "No authors found in Trash"
+msgstr "Нет авторов найдено в корзине"
+
+#: functions.php:91 functions.php:97 functions.php:103
+msgid "Publishers"
+msgstr "Издатель (и)"
+
+#: functions.php:92 functions.php:413
+msgid "Publisher"
+msgstr "Издательство"
+
+#: functions.php:94
+msgid "Add New Publisher"
+msgstr "Добавить Издатель"
+
+#: functions.php:95
+msgid "Edit Publisher"
+msgstr "Изменить Издатель"
+
+#: functions.php:96
+msgid "New Publisher"
+msgstr "Новый Издатель"
+
+#: functions.php:98
+msgid "View Publisher"
+msgstr "Посмотреть Издательство"
+
+#: functions.php:99
+msgid "Search Publisher"
+msgstr "Поиск Издательство"
+
+#: functions.php:100
+msgid "No Publishers found"
+msgstr "Не Издатели не найдено"
+
+#: functions.php:101
+msgid "No Publishers found in Trash"
+msgstr "Не Издатели не найдено в корзине"
+
+#: functions.php:123 functions.php:129 functions.php:135
+msgid "Orders"
+msgstr "заказы"
+
+#: functions.php:124
+msgid "Order"
+msgstr "Порядок"
+
+#: functions.php:127
+msgid "Edit Order"
+msgstr "Изменить заказ"
+
+#: functions.php:128
+msgid "New Order"
+msgstr "Новый заказ"
+
+#: functions.php:130
+msgid "View Order Details"
+msgstr "Просмотр данных заказа"
+
+#: functions.php:131
+msgid "Search Order"
+msgstr "Поиск заказа"
+
+#: functions.php:132
+msgid "No orders found"
+msgstr "Не найдено заказов"
+
+#: functions.php:133
+msgid "No orders found in Trash"
+msgstr "Нет заказов в корзине"
+
+#: functions.php:173
+msgid "eBook Details"
+msgstr "Электронная книга подробности"
+
+#: functions.php:180
+msgid "eBook Store - Click on eBook to embed it"
+msgstr "электронная книга Store - Нажмите на книгу, чтобы встроить его"
+
+#: functions.php:187
+msgid "eBook Store - Click eBook to Embed"
+msgstr "электронная книга Store - Нажмите книгу, чтобы встроить"
+
+#: functions.php:251
+msgid ""
+"Copy and paste this code in your post or page where you want the order form "
+"to appear."
+msgstr "Скопируйте и вставьте этот код в ваш пост или страницу, где вы хотите, чтобы форма заказа появится."
+
+#: functions.php:350
+msgid ""
+"Copy and paste this code in your post or page where you want the order form "
+"to appear"
+msgstr "Скопируйте и вставьте этот код в ваш пост или страницу, где вы хотите, чтобы форма заказа появится"
+
+#: functions.php:362
+msgid "Please note the max upload size set on this server is"
+msgstr "Обратите внимание, что максимальный размер Настр.загрузки на этом сервере"
+
+#: functions.php:363 functions.php:369 functions.php:375 functions.php:381 
+#: functions.php:387
+msgid "File"
+msgstr "Файл"
+
+#: functions.php:370 functions.php:376 functions.php:382 functions.php:388
+msgid "ebook format is not uploaded."
+msgstr "формат электронных книг не загружена."
+
+#: functions.php:398
+msgid "Cover Image"
+msgstr "Изображение на обложке"
+
+#: functions.php:398 functions.php:400 functions.php:404 functions.php:407 
+#: functions.php:413 functions.php:417 functions.php:418
+msgid "optional"
+msgstr "дополнительно"
+
+#: functions.php:398 functions.php:404
+msgid "recommended"
+msgstr "рекомендуется"
+
+#: functions.php:400
+msgid "eBook Preview"
+msgstr "Электронная книга Просмотр"
+
+#: functions.php:404
+msgid "Side Image"
+msgstr "Side Image"
+
+#: functions.php:404
+msgid "Currently uploaded"
+msgstr "В настоящее время загружены"
+
+#: functions.php:408 functions.php:414
+msgid "None"
+msgstr "обыкновенный"
+
+#: functions.php:417 functions.php:1852
+msgid "Date"
+msgstr "Дата "
+
+#: functions.php:420 functions.php:1853
+msgid "Price"
+msgstr "Цена"
+
+#: functions.php:421
+msgid "Currency"
+msgstr "Валюта"
+
+#: functions.php:428
+msgid "Bonus ebook"
+msgstr "Bonus электронную книгу"
+
+#: functions.php:438
+msgid "Paid or free download"
+msgstr "Платный или скачать бесплатно"
+
+#: functions.php:439
+msgid "Paid download"
+msgstr "Платные загрузки"
+
+#: functions.php:439
+msgid ""
+"Order is placed through PayPal and the user is returned to the site for "
+"downloading the product. Email delivery routine will be triggered."
+msgstr "Заказ через PayPal помещается и пользователь возвращается на сайт для загрузки продукта. Email процедура доставки будет срабатывать."
+
+#: functions.php:440
+msgid "Allow free download"
+msgstr "Разрешить скачать бесплатно"
+
+#: functions.php:440
+msgid "User is not sent to PayPal, download starts directly"
+msgstr "Пользователь не отправляется в PayPal, начнется загрузка напрямую"
+
+#: functions.php:441
+msgid "Donate to download"
+msgstr "Пожертвуйте скачать"
+
+#: functions.php:441
+msgid "User can set a price for the ebook once it lands on PayPal."
+msgstr "Пользователь может установить цену на книгу, как только он попадает на PayPal."
+
+#: functions.php:1848
+msgid "Cover"
+msgstr "Залить"
+
+#: functions.php:1849
+msgid "Book Title"
+msgstr "Заголовок книги"
+
+#: functions.php:1854
+msgid "Sales"
+msgstr "Продажи"
+
+#: functions.php:1855
+msgid "Embed Code for posts and pages"
+msgstr "Код для вставки постов и страниц"
+
+#: functions.php:1869
+msgid "Direct Order Link"
+msgstr "Прямая ссылка Заказать"
+
+#: functions.php:1880
+msgid "Total"
+msgstr "Итого"
+
+#: functions.php:1880
+msgid "7 Days"
+msgstr "дней"
+
+#: functions.php:1880
+msgid "30 Days"
+msgstr "дней"
+
+#: functions.php:2124 functions.php:2125 functions.php:2159
+msgid "Orders - Add New"
+msgstr "Заказы - Добавить новую"
+
+#: functions.php:2164
+msgid "First Name"
+msgstr "Имя"
+
+#: functions.php:2169
+msgid "Last Name"
+msgstr "Фамилия"
+
+#: functions.php:2174
+msgid "Amount Paid"
+msgstr "Сумма оплаченная:"
+
+#: functions.php:2180
+msgid "Select Ebook"
+msgstr "Выберите Электронная книга"
+
+#: functions.php:2186
+msgid "Buyer Email"
+msgstr "Покупатель E-mail"
+
+#: functions.php:2188
+msgid ""
+"The buyer will be now send a thank you email with the appropriate download "
+"links for the ebook and it's formats."
+msgstr "Покупатель будет теперь послать благодарственное электронное письмо с соответствующими ссылки для загрузки электронных книг, и это форматы."
+
+#: functions.php:2192
+msgid ""
+"\"Thank you\" email will be sent immediately with the download links for the "
+"ebook. If encryption is enabled, the file will be encrypted."
+msgstr "\ "Спасибо \" по электронной почте будет отправлено с ссылки для загрузки электронных книг. Если шифрование включено, то файл будет зашифрован."
+
+#: functions.php:2269
+msgid ""
+"Order has been generated and email was sent to the buyer!<br /><small>If "
+"your email has not arrived, we strongly recommend using Easy WP SMTP to send "
+"emails trough a service like Gmail to ensure inbox delivery.</small>"
+msgstr "Заказ был создан и электронная почта была отправлена ​​покупателю! <br /> <Маленький> Если ваша электронная почта не приехал, мы настоятельно рекомендуем использовать Easy WP SMTP для отправки сообщений электронной почты корыта службы, как Gmail, чтобы обеспечить доставку почтовый ящик. </ Маленький>"
+
+#: functions.php:2354 functions.php:2698
+msgid "Ebook Store"
+msgstr "Электронная книга магазин"
+
+#: functions.php:2656
+msgctxt "Ebook Categories"
+msgid "Ebook Categories"
+msgstr "Электронная книга Категории"
+
+#: functions.php:2657
+msgctxt "Ebook Category"
+msgid "Ebook Category"
+msgstr "Электронная книга Категория"
+
+#: functions.php:2658
+msgid "Search Ebook Categories"
+msgstr "Поиск Электронная книга Категории"
+
+#: functions.php:2659
+msgid "All Ebook Categories"
+msgstr "Все категории Электронная книга"
+
+#: functions.php:2660
+msgid "Parent Ebook Category"
+msgstr "Родитель книги Категория"
+
+#: functions.php:2661
+msgid "Parent Ebook Category:"
+msgstr "Родитель книги Категория:"
+
+#: functions.php:2662
+msgid "Edit Ebook Category"
+msgstr "Редактирование книги Категория"
+
+#: functions.php:2663
+msgid "Update Ebook Category"
+msgstr "Обновление книги Категория"
+
+#: functions.php:2664
+msgid "Add New Ebook Category"
+msgstr "Добавить Ebook Категория"
+
+#: functions.php:2665
+msgid "New Ebook Category"
+msgstr "Новая электронная книга Категория"
+
+#: functions.php:2666
+msgid "Ebook Categories"
+msgstr "Электронная книга Категории"
+
+#: settings-PDF-Protection.php:5
+msgid "Encrypt PDF Files"
+msgstr "Шифрование файлов PDF"
+
+#: settings-PDF-Protection.php:6
+msgid ""
+"This will option will enable encrypted delivery, both via email as "
+"attachment (if enabled) and via site download. The password of the encrypted "
+"PDF file is always the buyer's PayPal email address."
+msgstr "Эта опция позволит зашифрованное доставку, как по электронной почте в виде вложения (если включен) и через загрузку сайта. Пароль зашифрованного файла PDF всегда покупателя PayPal адрес электронной почты."
+
+#: settings-PDF-Protection.php:10
+msgid "Use Random Password"
+msgstr "Используйте Random Password"
+
+#: settings-PDF-Protection.php:11
+msgid ""
+"If this feature is enabled, instead of using buyer's email address as PDF "
+"password, the plugin will generate a random password which will be shown in "
+"the email and thank you page template."
+msgstr "Если эта функция включена, вместо того чтобы использовать адрес электронной почты покупателя как PDF пароль, плагин будет генерировать случайный пароль, который будет показан в электронной почте и спасибо шаблон страницы."
+
+#: settings-PDF-Protection.php:15
+msgid "Use Blank Password"
+msgstr "Используйте пустой пароль"
+
+#: settings-PDF-Protection.php:16
+msgid ""
+"If this feature is enabled the file will still be encrypted, but without "
+"password, which means the watermarking and print/modification will still "
+"work and the document will open without password."
+msgstr "Если эта функция включена файл по-прежнему будет зашифрован, но без пароля, что означает, что водяные знаки и печати / изменения будут по-прежнему работать, и документ будет открыт без ввода пароля."
+
+#: settings-PDF-Protection.php:21
+msgid "Encrypt Free Files with Logged in user's email"
+msgstr "Шифрование файлов с помощью Free Записан в сообщениях электронной почты пользователя"
+
+#: settings-PDF-Protection.php:22
+msgid ""
+"This feature enables password encryption for free files if the user is "
+"logged in. The account email address is used for the encryption process."
+msgstr "Эта функция позволяет осуществлять шифрование паролей для свободных файлов, если пользователь вошел в систему. Учетная запись электронной почты используется для процесса шифрования."
+
+#: settings-PDF-Protection.php:26
+msgid "PDF Master (Owner) password"
+msgstr "PDF Master (Владелец) пароль"
+
+#: settings-PDF-Protection.php:32
+msgid "PDF User Password"
+msgstr "PDF Пароль"
+
+#: settings-PDF-Protection.php:33
+msgid ""
+"User password is always the PayPal email address of the buyer used when "
+"buying the PDF ebook."
+msgstr "Пароль пользователя всегда PayPal адрес электронной почты покупателя, используемого при покупке PDF электронную книгу."
+
+#: settings-PDF-Protection.php:36
+msgid "Disable PDF Printing"
+msgstr "Отключить PDF Печать"
+
+#: settings-PDF-Protection.php:37 settings-PDF-Protection.php:49
+msgid "This feature will disable printing for the PDF files you're selling."
+msgstr "Эта функция будет отключить печать для PDF-файлов вы продаете."
+
+#: settings-PDF-Protection.php:40
+msgid "Disable Copy/Paste from PDF"
+msgstr "Отключить Копировать / Вставить из PDF"
+
+#: settings-PDF-Protection.php:41
+msgid "This feature will disable copying from the PDF files you're selling."
+msgstr "Эта функция позволяет отключить копирование из PDF-файлов вы продаете."
+
+#: settings-PDF-Protection.php:44
+msgid "Disable PDF Modification"
+msgstr "Отключить PDF Модификация"
+
+#: settings-PDF-Protection.php:45
+msgid ""
+"This feature will disable modifications for the PDF files you're selling."
+msgstr "Эта функция будет отключить изменения для PDF-файлов вы продаете."
+
+#: settings-PDF-Protection.php:48
+msgid "Disable Annotation forms"
+msgstr "Отключить аннотирования формы"
+
+#: settings-PDF-Protection.php:52
+msgid "QR Code"
+msgstr "QR-код"
+
+#: settings-PDF-Protection.php:53
+msgid "see sample"
+msgstr "см образец"
+
+#: settings-PDF-Protection.php:53
+msgid "PDF only"
+msgstr "только PDF"
+
+#: settings-PDF-Protection.php:54
+msgid ""
+"Once enabled, every page will have a QR code watermark on bottom right "
+"corner. Once scanned with any Android / iOS device it gives information for "
+"the buyer in case the file is pirated online / offline."
+msgstr "После включения, каждая страница будет иметь код водяного знака QR на нижнем правом углу. После сканирования с любым устройством Android / ОС IOS она дает информацию для покупателя в случае, если файл является пиратским онлайн / оффлайн."
+
+#: settings-PDF-Protection.php:58
+msgid "Buyer Info in PDF header"
+msgstr "Информация о покупателе в заголовке PDF"
+
+#: settings-PDF-Protection.php:60
+msgid ""
+"This feature will print/watermark the buyer's information in the header of "
+"each page."
+msgstr "Эта функция будет печатать / водяные знаки информацию покупателя в заголовке каждой страницы."
+
+#: settings-PDF-Protection.php:63
+msgid "Buyer info text"
+msgstr "Покупатель информационный текст"
+
+#: settings-Fonts.php:5
+msgid "Ebook Title Font Size"
+msgstr "Электронная книга Название Размер шрифта"
+
+#: settings-Fonts.php:24
+msgid "Links Font Size"
+msgstr "Ссылки Размер шрифта"
+
+#: settings-MailChimp.php:5
+msgid "Get it from"
+msgstr "Получить его из"
+
+#: settings-MailChimp.php:9
+msgid "Subscribe buyers to MailChimp list"
+msgstr "Подписаться покупателей в список MailChimp"
+
+#. Name of the plugin
+msgid "eBook store"
+msgstr "электронная книга магазин"
+
+#. Description of the plugin
+msgid ""
+"eBook Store is a unique and powerful standalone tool for selling ebooks with "
+"WordPress (also WooCommerce support is available), allowing you to display "
+"beautiful buy now forms for your ebook(s) and giving you the ability to "
+"offer encrypted, watermarked and QR code stamped ebooks to your buyers, a "
+"proven way to prevent piracy. With the built-in MailChimp integration you "
+"can directly subscribe your clients to a mailing list. It supports PDF, ePub,"
+" TXT, Mobi and Zip files. Now comes with WP Affiliates Manager integration "
+"so you can pay commissions to affiliates for promoting your ebook."
+msgstr "электронная книга магазин является уникальным и мощным инструментом автономный для продажи электронных книг с WordPress (также WooCommerce поддержка доступна), что позволяет отображать красивые покупки в настоящее время является для вашей книги (ы) и дает вам возможность предлагать зашифрованы, водяными и QR-код штампованным электронные книги для ваших покупателей, проверенным способом, чтобы предотвратить пиратство. С помощью встроенного в интеграции MailChimp вы можете сразу подписаться ваших клиентов в список рассылки. Он поддерживает PDF, EPUB, TXT, Mobi и Zip файлы. Теперь приходит с интеграцией WP Affiliates Manager, так что вы можете платить комиссионные филиалов для продвижения вашей книги."
+
+#. URI of the plugin
+#. Author URI of the plugin
+msgid "https://www.shopfiles.com/index.php/products/wordpress-ebook-store"
+msgstr "https://www.shopfiles.com/index.php/products/wordpress-ebook-store"
+
+#. Author of the plugin
+msgid "Shopfiles Ltd"
+msgstr "Shopfiles Ltd"
+
