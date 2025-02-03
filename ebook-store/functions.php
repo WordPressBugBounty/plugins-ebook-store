@@ -5,7 +5,7 @@
 include_once('EbookStoreEbook.class.php');
 include_once('EbookStore.Elementor.php');
 
-////
+/////
 
 function ebook_activate() {
 	// register taxonomies/post types here
@@ -331,6 +331,11 @@ function ebook_wp_custom_attachment() {
 	$new = new WP_Query('post_type=ebook_publisher');
 	while ($new->have_posts()) : $new->the_post();
 	unset($selected);
+	if (!is_array($ebook)) {
+		$ebook = array();
+		$ebook['ebook_publisher'] = array();
+	}
+
 	if (@is_null($ebook['ebook_publisher'])) {
 		$ebook['ebook_publisher'] = array();
 	}
@@ -733,28 +738,44 @@ function ebook_update_edit_form() {
 	echo ' enctype="multipart/form-data"';
 } // end ebook_update_edit_form
 function ebook_download_link($ebook_order, $free = false, $bonus = false, $bonus_ebook_id = null) {
+    if ($free == 0) {
+        $action_name = 'download';
+    } else {
+        $action_name = 'download_free';
+    }
 
-	if ($free == 0) {
-		$action_name = 'download';
-	} else {
-		$action_name = 'download_free';
-	}
-	$link = add_query_arg(array('ebook_key' => $ebook_order['ebook_key'][0], 'action' => $action_name, 'md5_nonce' => @$ebook_order['md5_nonce'][0]),get_permalink($ebook_order['ebook'][0]));
-	$link = remove_query_arg('p',$link);
-	if ($action_name == 'download_free') {
-		$link = add_query_arg(array('p' => $ebook_order['ebook'][0]),$link);
-	}
-	$post = get_post($ebook_order['ebook'][0]);
-	$slug = $post->post_name;
-	$link = add_query_arg(array('ebook' => $slug),$link);
+    // Sanitize and escape parameters before adding to URL
+    $ebook_key = isset($ebook_order['ebook_key'][0]) ? esc_attr($ebook_order['ebook_key'][0]) : '';
+    $md5_nonce = isset($ebook_order['md5_nonce'][0]) ? esc_attr($ebook_order['md5_nonce'][0]) : '';
+    $ebook_id = isset($ebook_order['ebook'][0]) ? absint($ebook_order['ebook'][0]) : 0;
 
-	if ($bonus > 0) {
-		$link = add_query_arg(array('type' => 'bonus'),$link);
-		$link = add_query_arg(array('ebook_id' => $bonus_ebook_id),$link);
-		$link = add_query_arg(array('order_id' => $ebook_order['order_id'][0]),$link);
-	}
-	//die('Bonus ' . $bonus);
-	return $link;
+    // Build URL with escaped parameters
+    $args = array(
+        'ebook_key' => $ebook_key,
+        'action' => $action_name,
+        'md5_nonce' => $md5_nonce
+    );
+    
+    $link = esc_url(add_query_arg($args, get_permalink($ebook_id)));
+    $link = esc_url(remove_query_arg('p', $link));
+
+    if ($action_name == 'download_free') {
+        $link = esc_url(add_query_arg(array('p' => $ebook_id), $link));
+    }
+
+    $post = get_post($ebook_id);
+    if ($post) {
+        $slug = sanitize_title($post->post_name);
+        $link = esc_url(add_query_arg(array('ebook' => $slug), $link));
+    }
+
+    if ($bonus > 0) {
+        $link = add_query_arg(array('type' => 'bonus'),$link);
+        $link = add_query_arg(array('ebook_id' => $bonus_ebook_id),$link);
+        $link = add_query_arg(array('order_id' => $ebook_order['order_id'][0]),$link);
+    }
+    //die('Bonus ' . $bonus);
+    return $link;
 }
 function humanFileSize($size,$unit="") {
 	if( (!$unit && $size >= 1<<30) || $unit == "GB")
@@ -2168,6 +2189,13 @@ function ebook_store_admin_notice_paypal() {
     </div>
     <?php
 }
+function ebook_store_admin_notice_autocompleteorders() {
+    ?>
+    <div class="updated">
+        <p><?php _e( 'If you plan to use Ebook Store + WooCommerce integration, we recommend installing the free plugin <a target="_blank" href="https://wordpress.org/plugins/autocomplete-woocommerce-orders/">Autocomplete WooCommerce Orders</a> so you can set it up to automatically complete orders for virtual goods to avoid processing status.', 'ebooks-store' ); ?></p>
+    </div>
+    <?php
+}
 
 function ebook_store_set_messages($messages) {
 	global $post, $post_ID;
@@ -2771,7 +2799,7 @@ function ebook_store_add_order($data, $silent = false, $thankYouRedirect = false
 				@update_post_meta($post_id,'password',$order['password']);
 				
 				
-				$ebook_email_delivery = array('to' => $data['payer_email'], 'subject' => get_option('email_delivery_subject'), 'text' => get_option('email_delivery_text',$QSWPOptions->email_delivery_text),'attachment' => $attachment, 'order' => $order);
+				$ebook_email_delivery = array('to' => $data['payer_email'], 'subject' => get_option('email_delivery_subject', $QSWPOptions->email_delivery_subject), 'text' => get_option('email_delivery_text',$QSWPOptions->email_delivery_text),'attachment' => $attachment, 'order' => $order);
 				//mail(get_option( 'admin_email' ), 'Ebook store for WordPress - Verified Order Received', print_r($ebook_email_delivery,true));
 				@$fileExt = pathinfo($attachment[0]['file'],PATHINFO_EXTENSION);
 				//wp_mail('deian@motov.net','test','test');
@@ -3053,12 +3081,13 @@ function ebook_store_woocommerce_email_delivery($order_id = 0, $event = 'complet
 	$order_items = $order->get_items();
 	$order->address = $order->get_address();
 	// error_log('WC ORDER' . print_r($order, true));
+	$QSWPOptions = new QSWPOptions();
 
 	foreach ($order_items as $id => $item) {
 	$ebook_email_delivery = array(
 		'to' => $order->address['email'], 
-		'subject' => get_option('email_delivery_subject'), 
-		'text' => get_option('email_delivery_text'),
+		'subject' => get_option('email_delivery_subject', $QSWPOptions->email_delivery_subject), 
+		'text' => get_option('email_delivery_text', $QSWPOptions->email_delivery_text),
 		//'attachment' => $attachment, 'order' => $order
 		);
 		// error_log(print_r($item,true));
@@ -3258,7 +3287,7 @@ function ebook_store_add_to_cart() {
 		global $ebook_store_messages;
 
 		if (get_option('ebook_store_woocommerce_integration_no_added_to_cart') < 1) {
-			$ebook_store_messages[$woocommerce_product_id] = '<div class="ebook-store-alert ebook-store-alert-success">“' . get_the_title($woocommerce_product_id) . '” ' . $locale['addedToCart'] . '. <a href="' . $woocommerce->cart->get_cart_url() . '" class="ebook_store_button">View Cart</a></div>';
+			$ebook_store_messages[$woocommerce_product_id] = '<div class="ebook-store-alert ebook-store-alert-success">"' . get_the_title($woocommerce_product_id) . '" ' . $locale['addedToCart'] . '. <a href="' . $woocommerce->cart->get_cart_url() . '" class="ebook_store_button">View Cart</a></div>';
 		}
 	}
 }

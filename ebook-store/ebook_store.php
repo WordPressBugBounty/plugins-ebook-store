@@ -7,7 +7,7 @@ Author: Shopfiles Ltd
 Text Domain: ebook-store
 Domain Path: /languages
 Author URI:https://www.shopfiles.com/index.php/products/wordpress-ebook-store
-Version: 5.8001
+Version: 5.8003
 License: GPLv2
 */
 
@@ -246,8 +246,12 @@ if (!function_exists('imagecreatefrompng')) {
 	add_action( 'admin_notices', 'ebook_store_missing_gd' );	
 }
 if (get_option('paypal_account') == '') {
-	add_action( 'admin_notices', 'ebook_store_admin_notice_paypal' );	
+	add_action( 'admin_notices', 'ebook_store_admin_notice_paypal' );
 }
+if (get_option('ebook_store_woocommerce_integration') == 1) {
+	//add_action( 'admin_notices', 'ebook_store_admin_notice_autocompleteorders' );	
+}
+
 
 add_action('init','ebook_store_offer_tutorial');
 
