@@ -5,6 +5,8 @@
 include_once('EbookStoreEbook.class.php');
 include_once('EbookStore.Elementor.php');
 
+
+
 /////
 
 function ebook_activate() {
@@ -827,6 +829,7 @@ function ebook_store( $atts, $buyNowOnly = false ){
 	$post_id = $atts['ebook_id'];
 
 	if (@$_REQUEST['ebook_key'] != false && @$_REQUEST['action'] == 'thank_you') {
+
 		add_action( 'wp_footer', 'ebook_store_deregister_embeds' );
 		if ($_REQUEST['ebook_key'] == -1) {
 			$wp_query_statement =  array (
@@ -870,7 +873,7 @@ function ebook_store( $atts, $buyNowOnly = false ){
 		
 		//wp_die('ebook order var ' . var_export($ebook_order,true));
 		if (!$ebook_order ||  @strtotime($ebook_order['payment_date'][0]) == 0 || isset($ebook_order['ebook']) == false) { //  || time() < @strtotime($ebook_order['payment_date'][0]) + 25 ||
-			return '<img src="' . plugins_url( 'img/pp_logo.png', __FILE__ ) . '"><h4>' . $locale['confirmation'] . '</h4>' . '<script>   window.setTimeout(\'location.reload()\', 5000);
+			return '<h4>' . $locale['confirmation'] . '</h4>' . '<script>   window.setTimeout(\'location.reload()\', 5000);
 </script>';
 		}
 		$file = get_post_meta($ebook_order['ebook'][0],'ebook_wp_custom_attachment',true);
@@ -879,6 +882,8 @@ function ebook_store( $atts, $buyNowOnly = false ){
 			$file = array();
 		}
 		$ebook_order['downloadlink'][0] = ebook_download_link($ebook_order);
+		$ebook_order['downloadlink'][0] = str_replace('#038;','&',$ebook_order['downloadlink'][0]);
+		$ebook_order['downloadlink'][0] = str_replace('&&','&',$ebook_order['downloadlink'][0]);
 		//<a href="%%downloadlink%%" target="_blank" rel="noopener">%%item_name%%</a> (%%filesize%%)
 		@$ebook_order['pdf_reader'][0] = ebook_pdf_reader($ebook_order);
 		@$ebook_order['download_links'][0] = implode("<br />",ebook_download_links($ebook_order));
@@ -886,7 +891,7 @@ function ebook_store( $atts, $buyNowOnly = false ){
 		@$ebook_order['filesize'][0] = humanFileSize(filesize($file['file']));
 		// $ebook_order['downloadlink_html'][0] = '<a href="'.ebook_download_link($ebook_order).'" target="_blank" rel="noopener">'.$ebook_order['item_name'][0].'</a> ('.$ebook_order['filesize'][0].')';
 		//print_r($ebook_order);
-
+		//file_put_contents(__DIR__ . '/debug.log', 'downloadlink: ' . $ebook_order['downloadlink'][0] . "\n", FILE_APPEND);
 		$ebookObj = new EbookStoreEbook(@$ebook_order['ebook'][0]);
 		$ebookObj->setLink['pdf'] = $ebook_order['downloadlink'][0];
 		$ebook_order['downloadlink_html'][0] = $ebookObj->format_links();
@@ -1031,6 +1036,50 @@ $addToCartButton = '<a  href="' . add_query_arg(array('woocommerce_product_id' =
 		$side = array();
 	}
 	@$extraButtons = apply_filters('ebook_store_extra_buttons',$extraButtons, $ebook['ebook_price'], $bookpost->post_title, $cover['url'], $md5_nonce, $post_id);
+	
+	// Add Stripe button if enabled
+	if (get_option('stripe_integration_enabled', 0)) {
+		// Get button text in current language
+		$current_lang = substr(get_locale(), 0, 2);
+		$button_texts = get_option('stripe_button_text', array());
+		$button_text = isset($button_texts[$current_lang]) && !empty($button_texts[$current_lang]) 
+			? $button_texts[$current_lang] 
+			: $button_texts[0];
+
+		// Only show Stripe button if price is greater than 0
+		
+		if ($ebook['ebook_price'] > 0) {
+			try {
+				// Generate ebook_key here, using same method as PayPal
+				$stripe_md5_nonce = wp_create_nonce('ebook_download_' . $post_id);
+				$stripe_ebook_key = $ebook_key;
+
+				// Create Stripe checkout session with the pre-generated key
+				$stripe_session_url = ebook_store_create_stripe_checkout(
+					$post_id, 
+					ebook_store_price_plus_vat($ebook['ebook_price']), 
+					$bookpost->post_title,
+					$ebook_key  // Pass the pre-generated key
+				);
+
+				// Replace %%price%% token with the formatted price
+				$c = new Currencies;
+				$paypal_currency = get_option('paypal_currency', 'USD');
+				$formatted_price = $c->getSymbol($paypal_currency) . number_format( ebook_store_price_plus_vat($ebook['ebook_price']), 2 );
+				$display_text = str_replace('%%price%%', $formatted_price, $button_text);
+
+				// Add Stripe button to extra buttons using the processed button text
+				$extraButtons[] = sprintf(
+					'<a href="%s" class="stripe-button">%s</a>',
+					esc_url($stripe_session_url),
+					esc_html($display_text)
+				);
+			} catch (Exception $e) {
+				error_log('Stripe button creation failed: ' . $e->getMessage());
+			}
+		}
+	}
+
 	$extraButtons = is_array($extraButtons) ? $extraButtons : array();
 	$form = '<form method="post" id="' . $md5rand . '" name="dmp_order_form" action="https://www' . (get_option('paypal_sandbox') != '' ? '.sandbox' : '') . '.paypal.com/cgi-bin/webscr">
 		<input type="hidden" name="rm" value="0">
@@ -1263,7 +1312,22 @@ function order_custom_columns($column)
 			$mc_fee = get_post_meta($post->ID,'mc_fee',true);
 			$total = floatval($mc_gross) - floatval($mc_fee);
 			$mc_fee = "Fee -" . $c->getSymbol($mc_currency) . @number_format(floatval(get_post_meta($post->ID,'mc_fee',true)),2);
-			echo $c->getSymbol($mc_currency) . @number_format($mc_gross,2) . "<br /><small>$mc_fee<br />Net: {$c->getSymbol($mc_currency)}$total</small>";
+			
+			echo 
+    // If $c->getSymbol($mc_currency) returns something falsy or causes an issue, fallback to '$'
+    (!empty($c->getSymbol($mc_currency)) ? $c->getSymbol($mc_currency) : '$') 
+    // If $mc_gross is missing or not set, fallback to 0, and then format it.
+    . number_format((float)($mc_gross ?? 0), 2) 
+    . "<br /><small>" 
+    // Same approach for $mc_fee
+    . number_format((float)($mc_fee ?? 0), 2) 
+    . "<br />Net: "
+    // Symbol again
+    . (!empty($c->getSymbol($mc_currency)) ? $c->getSymbol($mc_currency) : '$') 
+    // If $total is missing, fallback to 0
+    . number_format((float)($total ?? 0), 2)
+    . "</small>";
+			
 			break;
 		case "country":
 			echo get_post_meta($post->ID,'residence_country',true);
@@ -2031,7 +2095,7 @@ function ebook_encrypt_pdf($r = null, $post_id = null) {
 	if ($r == false) {
 		$r = $_REQUEST;
 	}
-
+	error_log('ebook_encrypt_pdf - ' . print_r($r,true));
 	global $ebook_email_delivery, $ebook_qr_text, $ebook_png_path, $ebook_pngname, $attachment, $pdfHeaderText;
 	global $ebook_store_random_password;
 	// require_once('fpdi/FPDF-master/fpdf.php');
@@ -2056,53 +2120,67 @@ function ebook_encrypt_pdf($r = null, $post_id = null) {
 	if (@!$file) {
 		$file = $ebook_email_delivery['attachment'][0]['file'];
 	}
-	$password = $r['payer_email'];
+	//password fixes...
 	if (get_option('ebook_store_random_password') == 1) {
-		if ($ebook_store_random_password != '') {
-			$r['password']	= $ebook_store_random_password;
-		}
-		if (@$r['password'] != '') {
-			$password = $r['password'];
-		} 
+		$password = $r['password'];
+	} else if (get_option('ebook_store_blank_password') == 1) {
+		$password = '';
+	} else {
+		$password = $r['payer_email'];
 	}
 
-	if (get_option('ebook_store_blank_password') == 1) {
-		$r['password'] = '';
-		$password = '';
-	}
+	//free files encrypt with user email? 
+
+
+	//$password = $r['payer_email'];
+	// if (get_option('ebook_store_random_password') == 1) {
+	// 	if ($ebook_store_random_password != '') {
+	// 		$r['password']	= $ebook_store_random_password;
+	// 	}
+	// 	if (@$r['password'] != '') {
+	// 		$password = $r['password'];
+	// 	} 
+	// }
+
+	// if (get_option('ebook_store_blank_password') == 1) {
+	// 	$r['password'] = '';
+	// 	$password = '';
+	// }
+
 	//random password for non logged in users
-	if (!is_user_logged_in() && get_option('formEnabled') < 1) {
-	    if (get_option('ebook_store_random_password') == 1) {
-	        $password = substr(md5(rand()),0,8);
-	        //$password = 'proba';
-	        $ebook_store_random_password = $password;
-	        if ($post_id != null) {
-	        	@update_post_meta($post_id,'password',$password);
-	        } 
+	// if (!is_user_logged_in() && get_option('formEnabled') < 1) {
+	//     if (get_option('ebook_store_random_password') == 1) {
+	//         $password = substr(md5(rand()),0,8);
+	//         //$password = 'proba';
+	//         $ebook_store_random_password = $password;
+	//         if ($post_id != null) {
+	//         	@update_post_meta($post_id,'password',$password);
+	//         } 
 	        
-	        // Additional code to handle the generated password
-	    }
-	}
-	if (is_user_logged_in()) {
-	    if (get_option('ebook_store_random_password') == 1) {
-	        $password = substr(md5(rand()),0,8);
-	        //$password = 'proba';
-	        $ebook_store_random_password = $password;
-	        if ($post_id != null) {
-	        	@update_post_meta($post_id,'password',$password);
-	        } 
+	//         // Additional code to handle the generated password
+	//     }
+	//}
+	// if (is_user_logged_in()) {
+	//     if (get_option('ebook_store_random_password') == 1) {
+	//         $password = substr(md5(rand()),0,8);
+	//         //$password = 'proba';
+	//         $ebook_store_random_password = $password;
+	//         if ($post_id != null) {
+	//         	@update_post_meta($post_id,'password',$password);
+	//         } 
 	        
-	        // Additional code to handle the generated password
-	    } else {
-	    	if (get_option('ebook_store_blank_password') < 1) {
-		    	$current_user = wp_get_current_user();
-		    	$password = $current_user->user_email;
-		    	if ($post_id != null) {
-		        	@update_post_meta($post_id,'password',$password);
-		        } 
-	    	}
-	    }		
-	}
+	//         // Additional code to handle the generated password
+	//     } else {
+	//     	if (get_option('ebook_store_blank_password') < 1) {
+	// 	    	$current_user = wp_get_current_user();
+	// 	    	$password = $current_user->user_email;
+	// 	    	if ($post_id != null) {
+	// 	        	@update_post_meta($post_id,'password',$password);
+	// 	        } 
+	//     	}
+	//     }		
+	// }
+
 	//wp_die($password . ' post id ' . $post_id);
 	//error_log('password ' . $password);
 
@@ -2155,7 +2233,7 @@ function ebook_encrypt_pdf($r = null, $post_id = null) {
 		unset($protection['modify']);
 	}
 	$pdf->SetProtection((array)$protection, $password, $owner_password);
-	
+	///error_log('encrypting ' . $destfile . ' ' . $password . ' ' . $owner_password);	
 	$pdf->Output($destfile, 'F');
 	update_post_meta(@$ebook_email_delivery['order']['order_id'],'encrypted_pdf',wp_slash($destfile));
 	//make sure enc file is attached
@@ -2797,7 +2875,7 @@ function ebook_store_add_order($data, $silent = false, $thankYouRedirect = false
 				update_post_meta($post_id,'downloadlink',$order['downloadlink']);
 				update_post_meta($post_id,'ebook',$data['ebook']);
 				@update_post_meta($post_id,'password',$order['password']);
-				
+				//error_log('ebook_store_add_order - ' . print_r($order,true));
 				
 				$ebook_email_delivery = array('to' => $data['payer_email'], 'subject' => get_option('email_delivery_subject', $QSWPOptions->email_delivery_subject), 'text' => get_option('email_delivery_text',$QSWPOptions->email_delivery_text),'attachment' => $attachment, 'order' => $order);
 				//mail(get_option( 'admin_email' ), 'Ebook store for WordPress - Verified Order Received', print_r($ebook_email_delivery,true));
@@ -3657,7 +3735,7 @@ function ebook_store_price_plus_vat($price) {
 
 
 function ebook_store_row( $atts, $content = "") {
-	return "<div class=\"ebook_store_row ebook_store_row_{$atts[col]}\">" . do_shortcode($content) . "</div>";
+	return "<div class=\"ebook_store_row ebook_store_row_".$atts['col']."\">" . do_shortcode($content) . "</div>";
 }
 
 function ebook_store_silent_registration($data) {
@@ -3694,7 +3772,7 @@ function ebook_store_silent_registration($data) {
 function ebook_store_downloads($atts) {
 	$args = array(
 		'post_type' => 'ebook_order',
-		'meta_query' => array(
+		'meta_query' => array(	
 			array(
 			'key' => 'user_id',
 			'value' => get_current_user_id(),
@@ -3808,4 +3886,280 @@ ebook
 
 function ebook_store_deregister_embeds(){
 	wp_dequeue_script( 'wp-embed' );
+}
+
+function ebook_store_create_stripe_checkout($ebook_id, $price, $title, $ebook_key) {
+    require_once(plugin_dir_path(__FILE__) . 'vendor/autoload.php');
+    
+    try {
+        \Stripe\Stripe::setApiKey(get_option('stripe_secret_key'));
+
+        // Get the checkout page URL
+        $checkout_page = get_option('ebook_store_checkout_page');
+        
+        // Create metadata first
+        $metadata = [
+            'ebook_id' => $ebook_id,
+            'ebook_key' => $ebook_key,
+            'price' => $price,
+            'title' => $title
+        ];
+
+        // Create session data using metadata's ebook_key
+		$success_url = add_query_arg(
+			array(
+				'ebook_key' => $metadata['ebook_key'],
+				'action' => 'thank_you'
+			),
+			get_permalink($checkout_page)
+		);
+		file_put_contents(__DIR__ . '/debug.log', 'success_url: ' . $success_url . "\n", FILE_APPEND);
+        $session_data = [
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => get_option('paypal_currency', 'USD'),
+                    'product_data' => [
+                        'name' => $title,
+                    ],
+                    'unit_amount' => $price * 100,
+                ],
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => $success_url,
+            'cancel_url' => get_option('stripe_cancel_url', home_url()),
+            'metadata' => $metadata,
+            'customer_email' => isset($_POST['email']) ? sanitize_email($_POST['email']) : null
+        ];
+		file_put_contents(__DIR__ . '/debug.log', 'metadata: ' . print_r($metadata, true) . "\n", FILE_APPEND);
+        // Create Stripe Checkout Session
+        $checkout_session = \Stripe\Checkout\Session::create($session_data);
+
+        return $checkout_session->url;
+    } catch(Exception $e) {
+        error_log('Stripe checkout creation failed: ' . $e->getMessage());
+        return false;
+    }
+}
+
+// Add this near the other add_action calls
+add_action('rest_api_init', 'ebook_store_register_stripe_webhook');
+
+function ebook_store_register_stripe_webhook() {
+    register_rest_route('ebook-store/v1', '/stripe-webhook', array(
+        'methods' => 'POST',
+        'callback' => 'ebook_store_handle_stripe_webhook',
+        'permission_callback' => '__return_true' // Public endpoint
+    ));
+}
+
+function ebook_store_handle_stripe_webhook(WP_REST_Request $request) {
+    // Get webhook payload and signature
+    $payload = $request->get_body();
+    $sig_header = $request->get_header('stripe-signature');
+    
+    // Log raw webhook data
+    $log_file = plugin_dir_path(__FILE__) . 'stripe-hosted-webhook.log.txt';
+    $log_data = date('[Y-m-d H:i:s] ') . "Webhook received\n";
+    $log_data .= "Signature: " . $sig_header . "\n";
+    $log_data .= "Payload: " . $payload . "\n";
+    $log_data .= "Headers: " . print_r($request->get_headers(), true) . "\n";
+    
+    //file_put_contents($log_file, $log_data, FILE_APPEND);
+
+    try {
+        require_once(plugin_dir_path(__FILE__) . 'vendor/autoload.php');
+        
+        // Set Stripe API key before any API calls
+        $stripe_secret_key = get_option('stripe_secret_key');
+        if (empty($stripe_secret_key)) {
+            throw new Exception('Stripe secret key not configured');
+        }
+        \Stripe\Stripe::setApiKey($stripe_secret_key);
+        
+        // Verify webhook signature
+        $webhook_secret = get_option('stripe_webhook_secret');
+        if (empty($webhook_secret)) {
+            throw new Exception('Stripe webhook secret not configured');
+        }
+
+        $event = \Stripe\Webhook::constructEvent(
+            $payload, 
+            $sig_header, 
+            $webhook_secret
+        );
+
+        // Log verified event
+        $log_data = date('[Y-m-d H:i:s] ') . "Event verified: " . $event->type . "\n";
+        $log_data .= "Event data: " . print_r($event->data->object->toArray(), true) . "\n";
+        file_put_contents($log_file, $log_data, FILE_APPEND);
+
+        // Handle the event
+        switch ($event->type) {
+            // case 'checkout.session.completed':
+            //     $session = $event->data->object;
+                
+            //     // Log session details
+            //     $log_data = date('[Y-m-d H:i:s] ') . "Checkout completed\n";
+            //     $log_data .= "Session ID: " . $session->id . "\n";
+            //     $log_data .= "Customer: " . $session->customer . "\n";
+            //     $log_data .= "Amount: " . ($session->amount_total/100) . " " . $session->currency . "\n";
+            //     $log_data .= "Metadata: " . print_r($session->metadata, true) . "\n";
+            //     file_put_contents($log_file, $log_data, FILE_APPEND);
+
+            //     // Get customer details from payment intent
+            //     $payment_intent = \Stripe\PaymentIntent::retrieve($session->payment_intent);
+            //     $charge = $payment_intent->charges->data[0];
+            //     $billing_details = $charge->billing_details;
+
+            //     // Only proceed if we have customer data
+            //     if (!empty($billing_details->email) && !empty($billing_details->name)) {
+            //         $name_parts = explode(' ', $billing_details->name, 2);
+                    
+            //         // Create order data
+            //         $order_data = array(
+            //             'first_name' => $name_parts[0],
+            //             'last_name' => isset($name_parts[1]) ? $name_parts[1] : '',
+            //             'payer_email' => $billing_details->email,
+            //             'payment_status' => 'Completed',
+            //             'txn_id' => $charge->id,
+            //             'payment_type' => 'stripe',
+            //             'mc_gross' => $session->metadata->price,
+            //             'ebook_key' => $session->metadata->ebook_key,
+            //             'ebook' => $session->metadata->ebook_id, // This is the correct field name for ebook_store_add_order
+            //             'post_id' => $session->metadata->ebook_id,
+            //             'mc_currency' => strtoupper($charge->currency),
+            //             'residence_country' => $billing_details->address->country ?? '',
+            //             'address_name' => $billing_details->name,
+            //             'address_street' => $billing_details->address->line1 ?? '',
+            //             'address_city' => $billing_details->address->city ?? '',
+            //             'address_state' => $billing_details->address->state ?? '',
+            //             'address_zip' => $billing_details->address->postal_code ?? '',
+            //             'address_country' => $billing_details->address->country ?? '',
+            //             'address_status' => 'confirmed'
+            //         );
+
+            //         // Log the order data being sent
+            //         $log_data = date('[Y-m-d H:i:s] ') . "Attempting to create order with data:\n";
+            //         $log_data .= print_r($order_data, true) . "\n";
+            //         file_put_contents($log_file, $log_data, FILE_APPEND);
+
+            //         // Add the order
+            //         $order_id = ebook_store_add_order($order_data);
+
+            //         if ($order_id) {
+            //             $log_data = date('[Y-m-d H:i:s] ') . "Order created successfully\n";
+            //             $log_data .= "Order ID: " . $order_id . "\n";
+            //             $log_data .= "Ebook ID: " . $order_data['ebook'] . "\n";
+            //             $log_data .= "Customer: " . $order_data['first_name'] . " " . $order_data['last_name'] . "\n";
+            //             $log_data .= "Email: " . $order_data['payer_email'] . "\n";
+            //             $log_data .= "Amount: " . $order_data['mc_gross'] . " " . $order_data['mc_currency'] . "\n";
+            //             $log_data .= "----------------------------------------\n";
+            //         } else {
+            //             $log_data = date('[Y-m-d H:i:s] ') . "Failed to create order\n";
+            //             $log_data .= "Order data: " . print_r($order_data, true) . "\n";
+            //             $log_data .= "----------------------------------------\n";
+            //         }
+            //         file_put_contents($log_file, $log_data, FILE_APPEND);
+            //     } else {
+            //         $log_data = date('[Y-m-d H:i:s] ') . "Missing required customer data\n";
+            //         $log_data .= "Billing details: " . print_r($billing_details, true) . "\n";
+            //         $log_data .= "----------------------------------------\n";
+            //         file_put_contents($log_file, $log_data, FILE_APPEND);
+            //     }
+            //     break;
+
+            case 'charge.updated':
+                $charge = $event->data->object;
+                
+                // Only process if payment is successful
+                if ($charge->status === 'succeeded' && $charge->paid === true) {
+                    // Get the payment intent to access the session data
+                    $payment_intent = \Stripe\PaymentIntent::retrieve($charge->payment_intent);
+                    $session = \Stripe\Checkout\Session::all([
+                        'payment_intent' => $payment_intent->id,
+                        'limit' => 1
+                    ])->data[0];
+
+                    // Get ebook details
+                    $ebook_id = $session->metadata->ebook_id;
+                    $ebook = get_post($ebook_id);
+
+                    // Log the data we're working with
+                    $log_data = date('[Y-m-d H:i:s] ') . "Processing charge.updated\n";
+                    $log_data .= "Charge ID: " . $charge->id . "\n";
+                    $log_data .= "Ebook ID: " . $ebook_id . "\n";
+                    $log_data .= "Ebook Title: " . $ebook->post_title . "\n";
+                    file_put_contents($log_file, $log_data, FILE_APPEND);
+
+                    // Extract billing details
+                    $billing_details = $charge->billing_details;
+                    $name_parts = explode(' ', $billing_details->name, 2);
+
+                    // Create order data matching the format used in ebook_store_add_order_page_callback.php
+                    $order_data = array(
+                        'first_name' => $name_parts[0],
+                        'last_name' => isset($name_parts[1]) ? $name_parts[1] : '',
+                        'payer_email' => $billing_details->email,
+                        'payment_status' => 'Completed',
+                        'txn_id' => $charge->id,
+                        'payment_type' => 'stripe',
+                        'mc_gross' => $session->metadata->price,
+                        'ebook_key' => $session->metadata->ebook_key,
+                        'ebook' => $ebook_id,  // This is the key field for the order
+                        'mc_currency' => strtoupper($charge->currency),
+                        'residence_country' => $billing_details->address->country ?? '',
+                        'address_name' => $billing_details->name,
+                        'address_street' => $billing_details->address->line1 ?? '',
+                        'address_city' => $billing_details->address->city ?? '',
+                        'address_state' => $billing_details->address->state ?? '',
+                        'address_zip' => $billing_details->address->postal_code ?? '',
+                        'address_country' => $billing_details->address->country ?? '',
+                        'address_status' => 'confirmed',
+                        'downloads' => 0  // Initialize download count
+                    );
+
+                    // Log the order data being sent
+                    $log_data = date('[Y-m-d H:i:s] ') . "Attempting to create order with data:\n";
+                    $log_data .= print_r($order_data, true) . "\n";
+                    file_put_contents($log_file, $log_data, FILE_APPEND);
+
+                    // Add the order
+					file_put_contents(__DIR__ . '/debug.log', 'order_data: ' . print_r($order_data, true) . "\n", FILE_APPEND);
+                    $order_id = ebook_store_add_order($order_data, false, false, $session->metadata->ebook_key);
+
+                    if ($order_id) {
+                        $log_data = date('[Y-m-d H:i:s] ') . "Order created successfully\n";
+                        $log_data .= "Order ID: " . $order_id . "\n";
+                        $log_data .= "Ebook: " . $ebook->post_title . " (ID: " . $ebook_id . ")\n";
+                        $log_data .= "Customer: " . $order_data['first_name'] . " " . $order_data['last_name'] . "\n";
+                        $log_data .= "Email: " . $order_data['payer_email'] . "\n";
+                        $log_data .= "Amount: " . $order_data['mc_gross'] . " " . $order_data['mc_currency'] . "\n";
+                    } else {
+                        $log_data = date('[Y-m-d H:i:s] ') . "Failed to create order\n";
+                        $log_data .= "Order data: " . print_r($order_data, true) . "\n";
+                    }
+                    file_put_contents($log_file, $log_data, FILE_APPEND);
+                }
+                break;
+
+            default:
+                $log_data = date('[Y-m-d H:i:s] ') . "Unhandled event type: " . $event->type . "\n";
+                file_put_contents($log_file, $log_data, FILE_APPEND);
+                break;
+        }
+
+        return new WP_REST_Response(array('received' => true), 200);
+
+    } catch(Exception $e) {
+        $log_data = date('[Y-m-d H:i:s] ') . "Error: " . get_class($e) . "\n";
+        $log_data .= "Error message: " . $e->getMessage() . "\n";
+        $log_data .= "----------------------------------------\n";
+        file_put_contents($log_file, $log_data, FILE_APPEND);
+        
+        return new WP_REST_Response(
+            array('error' => $e->getMessage()), 
+            $e instanceof \Stripe\Exception\SignatureVerificationException ? 400 : 500
+        );
+    }
 }

@@ -7,7 +7,7 @@ Author: Shopfiles Ltd
 Text Domain: ebook-store
 Domain Path: /languages
 Author URI:https://www.shopfiles.com/index.php/products/wordpress-ebook-store
-Version: 5.8003
+Version: 5.8005
 License: GPLv2
 */
 
@@ -156,8 +156,11 @@ function ebook_store_check_ipn() {
 				if (get_option('ebook_store_random_password') == 1) {
 					$ebook_store_random_password = substr(md5(microtime()),0,8);
 					$order['password'] = $ebook_store_random_password;
+					$_REQUEST['password'] = $ebook_store_random_password;
 					update_post_meta($post_id,'password',$ebook_store_random_password);
 				} else {
+					$order['password'] = $_REQUEST['payer_email'];
+					$_REQUEST['password'] = $_REQUEST['payer_email'];
 					update_post_meta($post_id,'password',$_REQUEST['payer_email']);
 				}
 
@@ -171,7 +174,7 @@ function ebook_store_check_ipn() {
 				$order['downloadlink_html'] = $ebookObj->format_links();
 				$order['ebook_bonus'] = (implode("<br />",ebook_download_links_bonus($order)) != '' ? implode("<br />",ebook_download_links_bonus($order)) : __('None','ebook-store'));
 
-				$ebook_email_delivery = array('to' => $_REQUEST['payer_email'], 'subject' => get_option('email_delivery_subject'), 'text' => get_option('email_delivery_text',$QSWPOptions->email_delivery_text),'attachment' => $attachment, 'order' => $order);
+				$ebook_email_delivery = array('to' => $_REQUEST['payer_email'], 'subject' => get_option('email_delivery_subject', $QSWPOptions->email_delivery_subject), 'text' => get_option('email_delivery_text', $QSWPOptions->email_delivery_text),'attachment' => $attachment, 'order' => $order);
 				//mail('deian@motov.net', 'eBook store for WordPress - Verified Order Received', print_r($ebook_email_delivery,true));
 				//wp_mail($_REQUEST['payer_email'],get_option('email_delivery_subject'),'Email delivery text');
 				$fileExt = pathinfo($attachment[0]['file'],PATHINFO_EXTENSION);

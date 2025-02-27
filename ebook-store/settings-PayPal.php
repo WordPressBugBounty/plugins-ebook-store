@@ -8,23 +8,7 @@
         <?php echo __('enable PayPal IPN in your PayPal account</a>. That\'s under Profile > My selling tools > Instant payment notifications. In the IPN url field enter your website address.', 'ebook-store'); ?></span></td>
         </tr>
         
-                <tr valign="top">
-        <th scope="row"><?php echo __('PayPal currency', 'ebook-store'); ?></th>
-        <td>
-        <select name="paypal_currency">
-        <?php 
-        //echo get_option('paypal_account');
-        foreach ($ppcurencies as $currency => $name) {
-                        $selected = '';
-                        if ($currency == esc_attr(get_option('paypal_currency',$op->paypal_currency))) {
-                                $selected = ' selected';
-                        }
-                        echo "<option value=\"$currency\"$selected>$name</option>";
-                }
-        ?>
-                </select> 
-        </td>
-        </tr>
+
         
         <tr valign="top">
         <th scope="row"><?php echo __('PayPal language', 'ebook-store'); ?></th>

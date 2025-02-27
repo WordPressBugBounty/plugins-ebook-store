@@ -16,6 +16,9 @@
         <th scope="row" class="goPro"><?php echo __('Integrate with WooCommerce', 'ebook-store'); ?></span></th>
         <td><input type="checkbox" name="ebook_store_woocommerce_integration"  value="1" <?php echo (get_option('ebook_store_woocommerce_integration') != '' ? 'checked="checked"' : ''); ?> /><span class="description">
             <?php echo __('This feature will let you assign ebook store items to your WooCommerce products which lets you benefit from the PDF protection features of the plugin but also use all payment gateways available for WooCommerce.', 'ebook-store'); ?><br /> <a href="https://www.youtube.com/watch?v=kaEKQ0yTaWA" target="_blank"><?php echo __('See video demo of WooCommerce integration', 'ebook-store'); ?></a>
+            <p>
+                    <?php _e( '<b>If you plan to use Ebook Store + WooCommerce integration, we recommend installing the free plugin <a target="_blank" href="https://wordpress.org/plugins/autocomplete-woocommerce-orders/">Autocomplete WooCommerce Orders</a> so you can set it up to automatically complete orders for virtual goods to avoid processing status and allow immediate email delivery.</b>', 'ebooks-store' ); ?>
+            </p>
         </span></td>
         </tr>
      
@@ -123,3 +126,16 @@
         </th>
         <td><input type="checkbox" name="ebook_store_no_viewerjs_previews"  value="1" <?php echo (get_option('ebook_store_no_viewerjs_previews') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('If your preview files have troubles with embedded links when customers are browsing the previews file, this will turn it off.', 'ebook-store'); ?></span></td>
         </tr>
+
+<?php
+// Ensure we're able to use is_plugin_active()
+if ( ! function_exists( 'is_plugin_active' ) ) {
+    require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+}
+
+if ( get_option('ebook_store_woocommerce_integration') && ! is_plugin_active( 'autocomplete-woocommerce-orders/autocomplete-woocommerce-orders.php' ) ) {
+    echo '<div style="padding:10px; border:1px solid #ccc; background:#fff3cd; margin-bottom:20px;">
+    <strong>Recommendation:</strong> The <em>Autocomplete WooCommerce Orders</em> plugin is not active. It is highly recommended to install and enable it for most WooCommerce setups so that orders with Virtual Goods are automatically marked as Completed. You can download and install it from <a href="https://wordpress.org/plugins/autocomplete-woocommerce-orders/" target="_blank">here</a>.
+    </div>';
+}
+?>

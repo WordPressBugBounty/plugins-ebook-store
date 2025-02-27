@@ -50,7 +50,7 @@ function register_ebook_store_settings() {
     register_setting( 'ebook-settings-group-mailchimp', 'mailchimp_lists' );
     register_setting( 'ebook-settings-group-paypal', 'ebook_store_allow_echeck' );
     register_setting( 'ebook-settings-group-paypal', 'ebook_store_require_shipping' );
-    register_setting( 'ebook-settings-group-paypal', 'paypal_currency' );
+    register_setting( 'ebook-settings-group-general', 'paypal_currency' );
     register_setting( 'ebook-settings-group-paypal', 'paypal_language' );
     register_setting( 'ebook-settings-group-paypal', 'paypal_return_button_text' );
     register_setting( 'ebook-settings-group-paypal', 'paypal_sandbox' );
@@ -82,6 +82,19 @@ function register_ebook_store_settings() {
     register_setting( 'ebook-settings-group-templates', 'formContent' );
     register_setting( 'ebook-settings-group-hosting', 'hideHostingSection' );
     register_setting( 'ebook-settings-group-general', 'ebookstorewpsc' ); //doesn't really matter where is assigned.
+    
+    register_setting('ebook-settings-group-stripe', 'stripe_publishable_key');
+    register_setting('ebook-settings-group-stripe', 'stripe_secret_key');
+    register_setting('ebook-settings-group-stripe', 'stripe_webhook_secret');
+    register_setting('ebook-settings-group-stripe', 'stripe_cancel_url');
+    register_setting('ebook-settings-group-stripe', 'stripe_integration_enabled');
+    register_setting('ebook-settings-group-stripe', 'stripe_button_text', array(
+        'type' => 'array',
+        'sanitize_callback' => function($value) {
+            if (!is_array($value)) return array();
+            return array_map('sanitize_text_field', $value);
+        }
+    ));
     
     do_action('ebook_store_extend_options');
 }
@@ -235,6 +248,7 @@ $tabs = array();
 $tabs['General'] = __('General', 'ebook-store');
 $tabs['Integrations'] = __('Integrations', 'ebook-store');
 $tabs['PayPal'] = __('PayPal', 'ebook-store');
+$tabs['Stripe'] = __('Stripe', 'ebook-store');
 $tabs = apply_filters('ebook_store_options_add_tab',$tabs);
 $tabs['Fonts'] = __('Fonts', 'ebook-store');
 $tabs['PDF-Protection'] = __('PDF-Protection', 'ebook-store');
