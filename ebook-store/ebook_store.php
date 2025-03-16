@@ -7,9 +7,63 @@ Author: Shopfiles Ltd
 Text Domain: ebook-store
 Domain Path: /languages
 Author URI:https://www.shopfiles.com/index.php/products/wordpress-ebook-store
-Version: 5.8005
+Version: 5.8006
 License: GPLv2
 */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
+/**
+ * Checks if Elementor is active.
+ *
+ * @return bool
+ */
+function is_elementor_active() {
+    return did_action( 'elementor/loaded' );
+}
+
+/**
+ * Registers the Sell Ebook widget.
+ *
+ * @param \Elementor\Widgets_Manager $widgets_manager Elementor widgets manager.
+ */
+function register_sell_ebook_widget( $widgets_manager ) {
+    require_once plugin_dir_path( __FILE__ ) . 'widgets/sell-ebook-widget.php';
+    $widgets_manager->register( new \Elementor_Sell_Ebook_Widget() );
+}
+
+/**
+ * Adds the "Ebook Store" category to Elementor.
+ *
+ * @param \Elementor\Elements_Manager $elements_manager Elementor elements manager.
+ */
+function add_ebook_store_category( $elements_manager ) {
+    $elements_manager->add_category(
+        'ebook-store',
+        [
+            'title' => __( 'Ebook Store', 'ebook-store-extension' ),
+            'icon'  => 'fa fa-book',
+        ]
+    );
+}
+
+// Initialize the plugin after Elementor is loaded.
+function init_ebook_store_extension() {
+    if ( is_elementor_active() ) {
+        add_action( 'elementor/widgets/register', 'register_sell_ebook_widget' );
+        add_action( 'elementor/elements/categories_registered', 'add_ebook_store_category' );
+    } else {
+        // Admin notice if Elementor is not active.
+        add_action( 'admin_notices', function() {
+            echo '<div class="notice notice-warning"><p>' . esc_html__( 'Ebook Store Extension requires Elementor to be active.', 'ebook-store-extension' ) . '</p></div>';
+        } );
+    }
+}
+add_action( 'plugins_loaded', 'init_ebook_store_extension' );
+
+
 
 function ebookstoretextdomain( $locale = null ) {
 	global $l10n;

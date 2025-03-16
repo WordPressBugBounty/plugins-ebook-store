@@ -3,7 +3,7 @@ Contributors: motov.net
 Tags: paypal, ebook, pdf, digital downloads, stripe, epub, ebooks, paid, downloads, qr code, sell ebook, pdf drm, watermark, encrypt, pdf, mobi, sell ebooks, donate, free, mailchimp, woocommerce, files, affiliates, viewerjs, sell, credit cards, gated content, lead generation, apple pay
 Requires at least: 3.5.1
 Tested up to: 6.7.2
-Stable tag: 5.8005
+Stable tag: 5.8006
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,6 +15,8 @@ Ebook Store Plugin for WordPress is a tool that allows you to sell, watermark, e
 The pro version is capable of encrypting the ebooks upon download or email delivery. It supports PDF, ePub, TXT, Mobi and Zip files.
 The Pro version also supports WooCommerce integration, so you can sell and deliver encrypted ebooks trough WooCommerce checkout, no additional setup required except enabling the feature and assigning an ebook to a woocommerce product.
 
+Integrates with Elementor and WooCommerce (optional).
+
 	Video demonstration:
 https://www.youtube.com/watch?v=HxYzlaEHPU4
 
@@ -24,10 +26,18 @@ https://www.youtube.com/watch?v=dJTvA0-lGmI
 Ebook store now supports integration with WooCommerce so you can add ebook store items to your WooCommerce products and let customers download ebooks from the checkout complete page. The PDF encryption and watermarking works well and will use the customer data to watermark the ebook which is a proven method to prevent piracy.
 
 	Payment Methods:
-With Ebook Store you can accept payments with:
+All supported via via WooCommerce and also with Ebook Store you can accept payments with (built in):
 1. [PayPal](http://paypal.com) - Account, Credit Card, eCheck, Bank / Wire transfer payments.
 2. [Stripe](http://stripe.com) - Credit Card payments, BitCoin.
-3. Apple Pay - coming soon!
+3. Apple Pay - YES via Stripe
+4. Google Pay - YES via Stripe
+5. Amazon Pay - YES via Stripe
+6. Cash App - YES via Stripe
+7. Klarna - YES via Stripe
+8. Link  - YES via Stripe
+9. WeChat - YES via Stripe
+10. PayNow - YES via Stripe
+11. SEPA - YES via Stripe
 
 	DEMO
 [Single ebook](http://wp.shopfiles.com/?p=116) - How the order page looks
@@ -122,6 +132,9 @@ The plugin can disable printing, apply watermark with buyer's information on eac
 
 
 == Changelog ==
+
+= 5.8006 =
+* Added Elementor compatibility
 
 = 5.786 =
 * Fixed problem with gutemberg editor

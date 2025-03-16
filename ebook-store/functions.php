@@ -7,8 +7,6 @@ include_once('EbookStore.Elementor.php');
 
 
 
-/////
-
 function ebook_activate() {
 	// register taxonomies/post types here
 	flush_rewrite_rules();
@@ -803,10 +801,12 @@ function ebook_store_wp_super_cache_check() {
 
 }
 function ebook_store( $atts, $buyNowOnly = false ){
-
+    if (!wp_script_is('jquery', 'enqueued')) {
+        wp_enqueue_script('jquery');
+    }
 	define('DONOTCACHEPAGE',true);
 	//@error_reporting(E_ALL);
-	ini_set('display_errors',1);
+	//ini_set('display_errors',1);
 	if (is_array($atts) == false) {
 		$atts = array('ebook_id' => $atts);
 	}

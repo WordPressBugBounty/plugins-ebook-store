@@ -12,10 +12,16 @@
         <th colspan="2" scope="row"> </th>
         </tr>
         <?php } ?>
+        
+        <!-- WooCommerce Integration Section -->
+        <tr valign="top">
+            <th colspan="2" scope="row"><h3><?php echo __('WooCommerce Integration', 'ebook-store'); ?></h3></th>
+        </tr>
+        
         <tr valign="top" class="goPro">
-        <th scope="row" class="goPro"><?php echo __('Integrate with WooCommerce', 'ebook-store'); ?></span></th>
+        <th scope="row" class="goPro"><?php echo __('Enable WooCommerce Integration', 'ebook-store'); ?></span></th>
         <td><input type="checkbox" name="ebook_store_woocommerce_integration"  value="1" <?php echo (get_option('ebook_store_woocommerce_integration') != '' ? 'checked="checked"' : ''); ?> /><span class="description">
-            <?php echo __('This feature will let you assign ebook store items to your WooCommerce products which lets you benefit from the PDF protection features of the plugin but also use all payment gateways available for WooCommerce.', 'ebook-store'); ?><br /> <a href="https://www.youtube.com/watch?v=kaEKQ0yTaWA" target="_blank"><?php echo __('See video demo of WooCommerce integration', 'ebook-store'); ?></a>
+            <?php echo __('Connect your eBooks to WooCommerce products to use WooCommerce payment gateways while keeping PDF protection features.', 'ebook-store'); ?><br /> <a href="https://www.youtube.com/watch?v=kaEKQ0yTaWA" target="_blank"><?php echo __('Watch video tutorial', 'ebook-store'); ?></a>
             <p>
                     <?php _e( '<b>If you plan to use Ebook Store + WooCommerce integration, we recommend installing the free plugin <a target="_blank" href="https://wordpress.org/plugins/autocomplete-woocommerce-orders/">Autocomplete WooCommerce Orders</a> so you can set it up to automatically complete orders for virtual goods to avoid processing status and allow immediate email delivery.</b>', 'ebooks-store' ); ?>
             </p>
@@ -23,14 +29,14 @@
         </tr>
      
         <tr valign="top" class="goPro">
-        <th scope="row" class="goPro"><?php echo __('Hide WooCommerce Added To Cart Message', 'ebook-store'); ?></span></th>
+        <th scope="row" class="goPro"><?php echo __('Hide "Added to Cart" Message', 'ebook-store'); ?></span></th>
         <td><input type="checkbox" name="ebook_store_woocommerce_integration_no_added_to_cart"  value="1" <?php echo (get_option('ebook_store_woocommerce_integration_no_added_to_cart') != '' ? 'checked="checked"' : ''); ?> /><span class="description">
-            <?php echo __('If this feature is enabled, no message will be displayed when item is added to WooCommerce cart if integration with WooCommerce is enabled.'); ?>
+            <?php echo __('Suppress the "Added to Cart" notification when customers add eBooks to their WooCommerce cart.'); ?>
         </span></td>
         </tr>
 
         <tr valign="top" class="goPro">
-        <th scope="row" class="goPro"><?php echo __('Require specific order status in WooCommerce for Downloads', 'ebook-store'); ?></span></th>
+        <th scope="row" class="goPro"><?php echo __('Required Order Status for Downloads', 'ebook-store'); ?></span></th>
         <td>
         <select name="ebook_store_woocommerce_required_order_status">
         <?php 
@@ -54,77 +60,95 @@
         </select>
 
         <span class="description">
-            <?php echo __('If you select a specific order status, the Downloads table will show only if the status matches the one specified here.'); ?>
+            <?php echo __('Only allow customers to download eBooks when their WooCommerce order reaches this status.'); ?>
         </span></td>
         </tr>
      
         <tr valign="top" class="goPro">
-        <th scope="row"><?php echo __('WooCommerce - Enable Online Reader', 'ebook-store'); ?></span></th>
+        <th scope="row"><?php echo __('Enable Online PDF Reader', 'ebook-store'); ?></span></th>
         <td><input type="checkbox" name="ebook_store_woocommerce_pdf_reader"  value="1" <?php echo (get_option('ebook_store_woocommerce_pdf_reader') != '' ? 'checked="checked"' : ''); ?> /><span class="description">
-            <?php echo __('This will add a "Read Online" link to your WooCommerce order confirmation page so customers can read the ebook online instead of downloading it. Encryption must be off for JavaScript to be able to parse your PDF file.', 'ebook-store'); ?>
+            <?php echo __('Add a "Read Online" option to WooCommerce order pages so customers can read PDFs in their browser. Note: PDF encryption must be disabled for this feature to work.', 'ebook-store'); ?>
         </span></td>
         </tr>
+
+        <!-- Display Options Section -->
+        <tr valign="top">
+            <th colspan="2" scope="row"><h3><?php echo __('Display & Purchase Options', 'ebook-store'); ?></h3></th>
+        </tr>
+        
         <tr valign="top" class="goPro">
-        <th scope="row"><?php echo __('Disable Auto refresh if the encryption is still in progress.', 'ebook-store'); ?></span></th>
+        <th scope="row"><?php echo __('Disable Auto-Refresh During Encryption', 'ebook-store'); ?></span></th>
         <td><input type="checkbox" name="ebook_store_no_autorefresh"  value="1" <?php echo (get_option('ebook_store_no_autorefresh') != '' ? 'checked="checked"' : ''); ?> /><span class="description">
-            <?php echo __('If you experience multiple downloads starting at once after encryption of large files, enable this feature to resolve the problem. It will show a retry download link instead of doing automated refresh.', 'ebook-store'); ?>
+            <?php echo __('For large files: Shows a manual "Retry Download" button instead of auto-refreshing, preventing multiple simultaneous downloads when encryption takes time.', 'ebook-store'); ?>
         </span></td>
         </tr>
+        
         <tr valign="top" class="goPro">
-        <th scope="row"><?php echo __('Integrate with WP Affiliates Manager', 'ebook-store'); ?></span></th>
-        <td><input type="checkbox" name="ebook_store_wp_affiliate_integration"  value="1" <?php echo (get_option('ebook_store_wp_affiliate_integration') != '' ? 'checked="checked"' : ''); ?> /><span class="description">
-            <?php echo __('Enable integration with', 'ebook-store'); ?> <a href="https://wordpress.org/plugins/affiliates-manager/" target="_blank">WP Affiliates Manager</a> <?php echo __('and pay commissions to affiliates that promote your ebook', 'ebook-store'); ?>.
-        </span></td>
-        </tr>
-
-        <tr valign="top" class="goPro">
-        <th scope="row"><?php echo __('Fill a form upon order', 'ebook-store'); ?>
-        </th>
-        <td><input type="checkbox" name="formEnabled"  value="1" <?php echo (get_option('formEnabled') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('If this feature is enabled the user will be asked to fill in a form with more details, the form you can edit as you wish with your own html editor and paste the code on this page\'s section with the form content.', 'ebook-store'); ?></span></td>
-        </tr>
-
-        <tr valign="top" class="goPro">
-  <th scope="row"><?php echo __('Force WP Forms to be used instead of default form', 'ebook-store'); ?></th>
-  <td>
-    <input type="checkbox" name="ebook_store_wpforms_default_form_force" value="1" <?php echo (get_option('ebook_store_wpforms_default_form_force') != '' ? 'checked="checked"' : ''); ?> />
-    <span class="description"><?php echo __('If this feature is enabled, WP Forms will be used instead of the default form.', 'ebook-store'); ?></span>
-  </td>
-</tr>
-
-
-        <tr valign="top" class="goPro">
-        <th scope="row"><?php echo __('Disable cover clicking', 'ebook-store'); ?>
+        <th scope="row"><?php echo __('Disable Cover Image Purchase', 'ebook-store'); ?>
         </th>
         <td><input type="checkbox" name="ebook_store_disable_cover_buy_now"  value="1" <?php echo (get_option('ebook_store_disable_cover_buy_now') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('This can be enabled in combination with the option below, to prevent standalone orders and use only WooCommerce cart.', 'ebook-store'); ?></span></td>
         </tr>
         </tr>
         <tr valign="top" class="goPro">
-        <th scope="row"><?php echo __('Hide Buy Now button', 'ebook-store'); ?>
+        <th scope="row"><?php echo __('Hide "Buy Now" Button', 'ebook-store'); ?>
         </th>
         <td><input type="checkbox" name="ebook_store_hide_buy_now"  value="1" <?php echo (get_option('ebook_store_hide_buy_now') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('This feature is useful when WooCommerce integration is used and you want to disallow standalone orders', 'ebook-store'); ?></span></td>
         </tr>
         </tr>
+        
         <tr valign="top" class="goPro">
-        <th scope="row"><?php echo __('Require @kindle.com email for delivery', 'ebook-store'); ?>
+        <th scope="row"><?php echo __('Disable Preview Viewer', 'ebook-store'); ?>
+        </th>
+        <td><input type="checkbox" name="ebook_store_no_viewerjs_previews"  value="1" <?php echo (get_option('ebook_store_no_viewerjs_previews') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('If your preview files have troubles with embedded links when customers are browsing the previews file, this will turn it off.', 'ebook-store'); ?></span></td>
+        </tr>
+
+        <!-- Customer Experience Section -->
+        <tr valign="top">
+            <th colspan="2" scope="row"><h3><?php echo __('Customer Experience', 'ebook-store'); ?></h3></th>
+        </tr>
+        
+        <tr valign="top" class="goPro">
+        <th scope="row"><?php echo __('Enable Customer Information Form', 'ebook-store'); ?>
+        </th>
+        <td><input type="checkbox" name="formEnabled"  value="1" <?php echo (get_option('formEnabled') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('If this feature is enabled the user will be asked to fill in a form with more details, the form you can edit as you wish with your own html editor and paste the code on this page\'s section with the form content.', 'ebook-store'); ?></span></td>
+        </tr>
+
+        <tr valign="top" class="goPro">
+        <th scope="row"><?php echo __('Use WPForms Instead of Default Form', 'ebook-store'); ?></th>
+        <td>
+          <input type="checkbox" name="ebook_store_wpforms_default_form_force" value="1" <?php echo (get_option('ebook_store_wpforms_default_form_force') != '' ? 'checked="checked"' : ''); ?> />
+          <span class="description"><?php echo __('If this feature is enabled, WP Forms will be used instead of the default form.', 'ebook-store'); ?></span>
+        </td>
+        </tr>
+
+        <tr valign="top" class="goPro">
+        <th scope="row"><?php echo __('Enable Kindle Email Delivery', 'ebook-store'); ?>
         </th>
         <td><input type="checkbox" name="kindleDelivery"  value="1" <?php echo (get_option('kindleDelivery') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('You can use that with combination of "Fill a form feature" to get the kindle email of the user (use field name "kindle_email").', 'ebook-store'); ?></span></td>
         </tr>
 
         <tr valign="top" class="goPro">
-        <th scope="row"><?php echo __('Read online and disallow download', 'ebook-store'); ?>
+        <th scope="row"><?php echo __('Online Reading Mode', 'ebook-store'); ?>
         </th>
         <td><span class="description"><?php echo __('Use %%pdf_reader%% in Thank You page body to activate it. The keyword will be replaced with a PDF Viewer instead. See <a href="http://viewerjs.org" target="_blank">DEMO</a> here.', 'ebook-store'); ?></span></td>
         </tr>
 
         <tr valign="top" class="goPro">
-        <th scope="row"><?php echo __('Auto register buyers', 'ebook-store'); ?>
+        <th scope="row"><?php echo __('Auto-Create Customer Accounts', 'ebook-store'); ?>
         </th>
         <td><input type="checkbox" name="ebook_store_silent_registration"  value="1" <?php echo (get_option('ebook_store_silent_registration') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('Once the customers complete payment for your ebook, a new account will be created for them and order will be assigned to their account so they can access it under Downloads page.', 'ebook-store'); ?></span></td>
         </tr>
+
+        <!-- Third-Party Integrations Section -->
+        <tr valign="top">
+            <th colspan="2" scope="row"><h3><?php echo __('Third-Party Integrations', 'ebook-store'); ?></h3></th>
+        </tr>
+        
         <tr valign="top" class="goPro">
-        <th scope="row"><?php echo __('Disable ViewerJS for previews', 'ebook-store'); ?>
-        </th>
-        <td><input type="checkbox" name="ebook_store_no_viewerjs_previews"  value="1" <?php echo (get_option('ebook_store_no_viewerjs_previews') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('If your preview files have troubles with embedded links when customers are browsing the previews file, this will turn it off.', 'ebook-store'); ?></span></td>
+        <th scope="row"><?php echo __('Enable Affiliate Program Integration', 'ebook-store'); ?></span></th>
+        <td><input type="checkbox" name="ebook_store_wp_affiliate_integration"  value="1" <?php echo (get_option('ebook_store_wp_affiliate_integration') != '' ? 'checked="checked"' : ''); ?> /><span class="description">
+            <?php echo __('Connect with', 'ebook-store'); ?> <a href="https://wordpress.org/plugins/affiliates-manager/" target="_blank">WP Affiliates Manager</a> <?php echo __('to track and pay commissions to affiliates who promote and sell your eBooks.', 'ebook-store'); ?>.
+        </span></td>
         </tr>
 
 <?php

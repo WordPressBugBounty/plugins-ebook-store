@@ -11,29 +11,16 @@
         </tr>
         <?php } ?>
 
+        <!-- PDF Security Settings -->
+        <tr valign="top">
+            <th colspan="2" scope="row"><h3><?php echo __('PDF Encryption Settings', 'ebook-store'); ?></h3></th>
+        </tr>
+        
         <tr valign="top" class="goPro">
-        <th scope="row"><?php echo __('Encrypt PDF Files', 'ebook-store'); ?></span></th>
+        <th scope="row"><?php echo __('Enable PDF Encryption', 'ebook-store'); ?></span></th>
         <td><input type="checkbox" name="encrypt_pdf"  value="1" <?php echo (get_option('encrypt_pdf') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('This will option will enable encrypted delivery, both via email as attachment (if enabled) and via site download. The password of the encrypted PDF file is always the buyer\'s PayPal email address.', 'ebook-store'); ?></span></td>
         </tr>
 
-        <tr valign="top" class="goPro">
-        <th scope="row"><?php echo __('QR Code', 'ebook-store'); ?>
-        <span class="description">(<a href="http://shopfiles.com/samples/protected_cv.pdf" target="_blank"><?php echo __('see sample', 'ebook-store'); ?></a>, <?php echo __('PDF only', 'ebook-store'); ?>)</span></th>
-        <td><input type="checkbox" name="qr_code"  value="1" <?php echo (get_option('qr_code') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('Once enabled, every page will have a QR code watermark on bottom right corner. Once scanned with any Android / iOS device it gives information for the buyer in case the file is pirated online / offline.', 'ebook-store'); ?></span></td>
-        </tr>
-
-        <tr valign="top" class="goPro">
-        <th scope="row"><?php echo __('Buyer Info in PDF header', 'ebook-store'); ?>
-        </th>
-        <td><input type="checkbox" name="buyer_info"  value="1" <?php echo (get_option('buyer_info') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('This feature will print/watermark the buyer\'s information in the header of each page.', 'ebook-store'); ?></span></td>
-        </tr>
-        <tr valign="top" class="goPro">
-        <th scope="row"><?php echo __('Buyer info text', 'ebook-store'); ?></th>
-        <td><input name="buyer_info_text" type="text" size="130" value="<?php 
-        echo esc_attr(get_option('buyer_info_text',$op->buyer_info_text));
-        ?>" /></td>
-        
-        </tr>        
         <tr valign="top" class="goPro">
         <th scope="row"><?php echo __('Use Random Password', 'ebook-store'); ?></span></th>
         <td><input type="checkbox" name="ebook_store_random_password"  value="1" <?php echo (get_option('ebook_store_random_password') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('If this feature is enabled, instead of using buyer\'s email address as PDF password, the plugin will generate a random password which will be shown in the email and thank you page template.', 'ebook-store'); ?></span></td>
@@ -60,6 +47,12 @@
         <th scope="row"><?php echo __('PDF User Password', 'ebook-store'); ?></th>
         <td><?php echo __('User password is always the PayPal email address of the buyer used when buying the PDF ebook.', 'ebook-store'); ?></td>
         </tr>
+
+        <!-- PDF Permissions -->
+        <tr valign="top">
+            <th colspan="2" scope="row"><h3><?php echo __('PDF Permissions', 'ebook-store'); ?></h3></th>
+        </tr>
+        
         <tr valign="top" class="goPro">
         <th scope="row"><?php echo __('Disable PDF Printing', 'ebook-store'); ?></span></th>
         <td><input type="checkbox" name="disable_pdf_printing"  value="1"  <?php echo (get_option('disable_pdf_printing') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('This feature will disable printing for the PDF files you\'re selling.', 'ebook-store'); ?></span></td>
@@ -77,6 +70,23 @@
         <td><input type="checkbox" name="disable_annot-forms"  value="1"  <?php echo (get_option('disable_annot-forms') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('This feature will disable printing for the PDF files you\'re selling.', 'ebook-store'); ?></span></td>
         </tr>
 
+        <!-- Watermarking -->
+        <tr valign="top">
+            <th colspan="2" scope="row"><h3><?php echo __('Watermarking', 'ebook-store'); ?></h3></th>
+        </tr>
+        
+        <tr valign="top" class="goPro">
+        <th scope="row"><?php echo __('Buyer Info in PDF header', 'ebook-store'); ?>
+        </th>
+        <td><input type="checkbox" name="buyer_info"  value="1" <?php echo (get_option('buyer_info') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('This feature will print/watermark the buyer\'s information in the header of each page.', 'ebook-store'); ?></span></td>
+        </tr>
+        <tr valign="top" class="goPro">
+        <th scope="row"><?php echo __('Buyer info text', 'ebook-store'); ?></th>
+        <td><input name="buyer_info_text" type="text" size="130" value="<?php 
+        echo esc_attr(get_option('buyer_info_text',$op->buyer_info_text));
+        ?>" /></td>
+        
+        </tr>        
 
         <tr valign="top" class="goPro">
         <th scope="row"><?php echo __('Watermark Position', 'ebook-store'); ?></th>
@@ -105,4 +115,15 @@
         echo esc_attr(get_option('ebook_store_watermark_color_hex',$op->ebook_store_watermark_color_hex));
         ?>" /></td>
         </tr>        
+
+        <!-- QR Code -->
+        <tr valign="top">
+            <th colspan="2" scope="row"><h3><?php echo __('QR Code Tracking', 'ebook-store'); ?></h3></th>
+        </tr>
+        
+        <tr valign="top" class="goPro">
+        <th scope="row"><?php echo __('QR Code', 'ebook-store'); ?>
+        <span class="description">(<a href="http://shopfiles.com/samples/protected_cv.pdf" target="_blank"><?php echo __('see sample', 'ebook-store'); ?></a>, <?php echo __('PDF only', 'ebook-store'); ?>)</span></th>
+        <td><input type="checkbox" name="qr_code"  value="1" <?php echo (get_option('qr_code') != '' ? 'checked="checked"' : ''); ?> /><span class="description"><?php echo __('Once enabled, every page will have a QR code watermark on bottom right corner. Once scanned with any Android / iOS device it gives information for the buyer in case the file is pirated online / offline.', 'ebook-store'); ?></span></td>
+        </tr>
 
