@@ -1029,9 +1029,11 @@ $addToCartButton = '<a  href="' . add_query_arg(array('woocommerce_product_id' =
 	if (!is_array($cover)) {
 		$cover = array();
 	}
-	if (!is_array(@$extraButtons)) {
-		@$extraButtons = array();
-	}
+	//$extraButtons[] = array();
+
+	// if (!is_array(@$extraButtons)) {
+	// 	@$extraButtons = array();
+	// }
 	if (!is_array($side)) {
 		$side = array();
 	}

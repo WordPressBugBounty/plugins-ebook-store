@@ -7,7 +7,7 @@ Author: Shopfiles Ltd
 Text Domain: ebook-store
 Domain Path: /languages
 Author URI:https://www.shopfiles.com/index.php/products/wordpress-ebook-store
-Version: 5.8006
+Version: 5.8007
 License: GPLv2
 */
 
@@ -57,7 +57,7 @@ function init_ebook_store_extension() {
     } else {
         // Admin notice if Elementor is not active.
         add_action( 'admin_notices', function() {
-            echo '<div class="notice notice-warning"><p>' . esc_html__( 'Ebook Store Extension requires Elementor to be active.', 'ebook-store-extension' ) . '</p></div>';
+            //echo '<div class="notice notice-warning"><p>' . esc_html__( 'Ebook Store Extension requires Elementor to be active.', 'ebook-store-extension' ) . '</p></div>';
         } );
     }
 }
