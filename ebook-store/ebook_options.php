@@ -232,11 +232,11 @@ ebook_store_wp_super_cache_warning();
     ?>
 
 
-<h2><?php echo __('eBook Store', 'ebook-store'); ?> - <?php echo __('Settings', 'ebook-store'); ?>
+<h3 class="text-xl font-bold text-gray-900 mb-4"><?php echo __('eBook Store', 'ebook-store'); ?> - <?php echo __('Settings', 'ebook-store'); ?>
 <?php if (get_option('ebook_store_license_key') == '') { ?>
- FREE (<a href="https://www.shopfiles.com/index.php/products/wordpress-ebook-store" target="_blank"><?php echo __('Upgrade to Pro', 'ebook-store'); ?></a>)
+ FREE (<a style="color: blue; text-decoration: underline;" href="https://www.shopfiles.com/index.php/products/wordpress-ebook-store" target="_blank"><?php echo __('Upgrade to Pro', 'ebook-store'); ?></a>)
 <?php } ?>
-</h2>
+</h3>
 <?php
 
 $tab = $_GET['tab'];
