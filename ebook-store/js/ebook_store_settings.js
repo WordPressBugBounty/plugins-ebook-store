@@ -61,3 +61,199 @@ function ebook_store_embed_code(ebook_id) {
 	});
 
 }
+
+jQuery(document).ready(function($) {
+    // Existing file upload UI enhancements
+    $('.ebook_store_upload input[type="file"]').each(function() {
+        const $input = $(this);
+        const $item = $input.closest('.ebook_store_file_format_item');
+        const format = $input.data('format');
+
+        // Handle file selection
+        $input.on('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const fileName = file.name;
+                const fileSize = humanFileSize(file.size);
+                
+                // Update UI
+                $item.find('.ebook_store_filename span').text(fileName);
+                $item.find('.ebook_store_size')
+                    .text(fileSize)
+                    .removeClass('hidden');
+                
+                // Show delete control
+                $item.find('.ebook_store_control').removeClass('hidden');
+            }
+        });
+
+        // Handle drag and drop
+        $input.on('dragenter dragover', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $item.addClass('drag-over');
+        });
+
+        $input.on('dragleave drop', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $item.removeClass('drag-over');
+        });
+    });
+
+    // Image preview functionality
+    function setupImagePreview($input, previewClass) {
+        const $wrapper = $input.closest('.ebook_store_image_wrapper');
+        const $preview = $wrapper.find('.ebook_store_image_preview');
+        
+        // Handle file selection
+        $input.on('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (!file.type.startsWith('image/')) {
+                    alert('Please select an image file');
+                    $input.val('');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    if ($preview.length === 0) {
+                        // Create preview element if it doesn't exist
+                        $wrapper.prepend(
+                            `<div class="ebook_store_image_preview ${previewClass}">
+                                <img src="${e.target.result}" alt="Preview">
+                                <div class="remove-image">
+                                    <span class="dashicons dashicons-no-alt"></span>
+                                </div>
+                                <div class="image-size">${humanFileSize(file.size)}</div>
+                            </div>`
+                        );
+                    } else {
+                        // Update existing preview
+                        $preview.removeClass('empty')
+                            .find('img')
+                            .attr('src', e.target.result);
+                        $preview.find('.image-size').text(humanFileSize(file.size));
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Handle remove image click
+        $wrapper.on('click', '.remove-image', function(e) {
+            e.preventDefault();
+            const $preview = $(this).closest('.ebook_store_image_preview');
+            $preview.addClass('empty').find('img').remove();
+            $input.val('');
+            // Add checkbox to actually delete the image on save if it exists
+            if ($wrapper.find('input[type="checkbox"]').length === 0) {
+                const inputName = $input.attr('name').replace('attachment', 'delete');
+                $wrapper.append(`<input type="checkbox" name="${inputName}" value="1" checked style="display: none;">`);
+            }
+        });
+    }
+
+    // Setup image previews for cover and side images
+    setupImagePreview($('input[name="ebook_wp_custom_attachment_cover"]'), 'cover-image');
+    setupImagePreview($('input[name="ebook_wp_custom_attachment_side_photo"]'), 'side-image');
+
+    // Handle delete checkbox
+    $('.ebook_store_control input[type="checkbox"]').on('change', function() {
+        const $checkbox = $(this);
+        const $item = $checkbox.closest('.ebook_store_file_format_item');
+        const $label = $checkbox.closest('label');
+
+        if ($checkbox.is(':checked')) {
+            $item.addClass('pending-delete');
+            $label.attr('title', wp.i18n.__('Undo delete', 'ebook-store'));
+        } else {
+            $item.removeClass('pending-delete');
+            $label.attr('title', wp.i18n.__('Delete file', 'ebook-store'));
+        }
+    });
+
+    // Helper function to format file size
+    function humanFileSize(bytes) {
+        const thresh = 1024;
+        if (Math.abs(bytes) < thresh) {
+            return bytes + ' B';
+        }
+        const units = ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        let u = -1;
+        do {
+            bytes /= thresh;
+            ++u;
+        } while (Math.abs(bytes) >= thresh && u < units.length - 1);
+        return bytes.toFixed(1) + ' ' + units[u];
+    }
+
+    // Add visual feedback for drag and drop
+    $('.ebook_store_file_format_item').each(function() {
+        const $item = $(this);
+        const $upload = $item.find('.ebook_store_upload');
+
+        $upload.append('<div class="upload-overlay">' + 
+            '<div class="upload-message">' + 
+                '<i class="dashicons dashicons-upload"></i>' + 
+                '<span>' + wp.i18n.__('Drop file here or click to upload', 'ebook-store') + '</span>' +
+            '</div>' +
+        '</div>');
+    });
+
+    // Initialize tooltips if jQuery UI is available
+    if ($.fn.tooltip) {
+        $('.ebook_store_file_format_item a, .ebook_store_control label').tooltip({
+            position: {
+                my: "center bottom-20",
+                at: "center top",
+                using: function(position, feedback) {
+                    $(this).css(position);
+                    $("<div>")
+                        .addClass("arrow")
+                        .addClass(feedback.vertical)
+                        .addClass(feedback.horizontal)
+                        .appendTo(this);
+                }
+            }
+        });
+    }
+
+    // Initialize existing image previews if images are already uploaded
+    function initializeExistingImagePreviews() {
+        $('input[name="ebook_wp_custom_attachment_cover"], input[name="ebook_wp_custom_attachment_side_photo"]').each(function() {
+            const $input = $(this);
+            const $wrapper = $input.closest('p');
+            const previewClass = $input.attr('name').includes('side_photo') ? 'side-image' : 'cover-image';
+            
+            // Convert p to div with wrapper class
+            $wrapper.wrap('<div class="ebook_store_image_wrapper"></div>');
+            
+            // Check if there's an existing image link
+            const $existingLink = $wrapper.find('a');
+            if ($existingLink.length) {
+                const imageUrl = $existingLink.attr('href');
+                const fileName = $existingLink.text();
+                
+                // Create preview element
+                $wrapper.parent().prepend(
+                    `<div class="ebook_store_image_preview ${previewClass}">
+                        <img src="${imageUrl}" alt="${fileName}">
+                        <div class="remove-image">
+                            <span class="dashicons dashicons-no-alt"></span>
+                        </div>
+                    </div>`
+                );
+            } else {
+                // Create empty preview placeholder
+                $wrapper.parent().prepend(
+                    `<div class="ebook_store_image_preview ${previewClass} empty"></div>`
+                );
+            }
+        });
+    }
+
+    // Call the initialization function
+    initializeExistingImagePreviews();
+});

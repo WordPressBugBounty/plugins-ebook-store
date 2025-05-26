@@ -255,7 +255,7 @@ $tabs['PDF-Protection'] = __('PDF-Protection', 'ebook-store');
 $tabs['MailChimp'] = __('MailChimp', 'ebook-store');
 $tabs['Templates'] = __('Templates', 'ebook-store');
 if (get_option( 'hideHostingSection', 0 ) == 0) {
-    $tabs['Hosting'] = __('Coupon Code for Hosting', 'ebook-store');    
+    //$tabs['Hosting'] = __('Coupon Code for Hosting', 'ebook-store');    
 }
 
 

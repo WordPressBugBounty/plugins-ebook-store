@@ -2,14 +2,20 @@
     width: 50%;
     float: left;
     min-width: 377px;
-    padding:5px;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
 }
 .ebookSeller50Percent select {
     min-height: 150px;
     min-width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 14px;
 }
 .ui-tooltip,
 .arrow:after {
@@ -104,15 +110,12 @@
 }
 
 .ebook-store-alert {
-  padding: 8px 35px 8px 14px;
-  margin-bottom: 18px;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  background-color: #fcf8e3;
-  border: 1px solid #fbeed5;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
+  padding: 12px 20px;
+  margin-bottom: 20px;
   border-radius: 4px;
-  color: #c09853;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .alert-heading {
   color: inherit;
@@ -124,20 +127,19 @@
   line-height: 18px;
 }
 .ebook-store-alert-success {
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
-  color: #468847;
+  background-color: #d1e7dd;
+  border: 1px solid #badbcc;
+  color: #0f5132;
 }
-.alert-danger,
-.alert-error {
-  background-color: #f2dede;
-  border-color: #eed3d7;
-  color: #b94a48;
+.ebook-store-alert-error {
+  background-color: #f8d7da;
+  border: 1px solid #f5c2c7;
+  color: #842029;
 }
-.alert-info {
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-  color: #3a87ad;
+.ebook-store-alert-info {
+  background-color: #cff4fc;
+  border: 1px solid #b6effb;
+  color: #055160;
 }
 .alert-block {
   padding-top: 14px;
@@ -169,138 +171,130 @@
 
 
 .ebook_store_icon {
+  width: 64px;
   height: 64px;
-  display: block;
-  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ebook_store_icon img {
+  max-width: 100%;
+  height: auto;
 }
 .ebook_store_filename {
-float: left;
-/*    overflow:hidden; 
-    /*white-space:nowrap; */*/
-    text-overflow: ellipsis;
-    width:auto;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+}
+.ebook_store_filename a {
+  color: #2271b1;
+  text-decoration: none;
+}
+.ebook_store_filename a:hover {
+  color: #135e96;
+  text-decoration: underline;
 }
 .ebook_store_size {
-float:right;
-}
-.ebook_store_control {
-float:left;
-clear:both;
+  font-size: 12px;
+  color: #666;
+  background: #e9ecef;
+  padding: 4px 8px;
+  border-radius: 4px;
 }
 .ebook_store_upload {
-clear:both;
-float: left;
+  position: relative;
+  margin-top: 5px;
 }
-.ebook_store_file_format_item {
-  float: left;
+.ebook_store_upload input[type="file"] {
   display: block;
-  min-height: 64px;
-  /*overflow-x:scroll;*/
-  margin-bottom:20px;
-  /*border: 1px solid;*/
-  clear: both;
   width: 100%;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  padding: 8px;
+  border: 2px dashed #ddd;
+  border-radius: 4px;
+  background: #f8f9fa;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
-.ebook_store_file_format_item:hover {
-  
+.ebook_store_upload input[type="file"]:hover {
+  border-color: #2271b1;
+  background: #f0f0f1;
 }
-.ebook_store_file_format_item * {
-/*   border: 1px solid; */
+.ebook_store_control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
 }
-.ebook_store_file_format_item:nth-child(odd) {
-  background: #f1f1f1;
-  padding:10px;
-  padding-right:0;
+.ebook_store_control label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s ease;
 }
-.ebook_store_file_format_item_left {
-  float: left;
-  width: 64px;
-  display: block;
-  min-height: 64px;
+.ebook_store_control label:hover {
+  color: #d63638;
 }
-.ebook_store_file_format_item_right {
-float: left;
-margin-left: 10px;
-width: calc(100% - 100px);
-/*border: 1px solid*/
+.ebook_store_control .dashicons-trash {
+  font-size: 16px;
 }
-
-@media only screen 
-and (min-device-width : 375px) 
-and (max-device-width : 667px) { 
-.ebook_store_file_format_item_right {
-  max-width: 230px;
-}
-}
-
-.bookshelf a, .bookshelf a:hover {
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  -o-transition: none !important;
-  transition: none !important;
-  border:0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+.hidden {
+  display: none !important;
 }
 
-.ebookStoreBookContent {
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-
-
+/* Form elements styling */
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border-color: #2271b1;
+  box-shadow: 0 0 0 1px #2271b1;
+  outline: none;
 }
 
-ul li::before {
-  content: '' !important;
+/* Helper text and labels */
+.description {
+  font-size: 12px;
+  color: #666;
+  margin-left: 5px;
+}
+h3, h4, h5 {
+  color: #1d2327;
+  margin-bottom: 15px;
 }
 
-tr.ebookStoreVersionComparison:nth-child(even) {
-  background: #CCC
-}
+/* Responsive adjustments */
+@media screen and (max-width: 782px) {
+  .ebookSeller50Percent {
+    width: 100%;
+    min-width: auto;
+    float: none;
+  }
 
-div.ebookStorEbookContent {
-  height: 300px;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-}
+  .ebook_store_file_format_item {
+    flex-direction: column;
+  }
 
+  .ebook_store_file_format_item_left {
+    width: 100%;
+    justify-content: center;
+  }
 
-div#bookshelf.bookshelf {
-
+  .ebook_store_file_format_item_right {
+    width: 100%;
+    text-align: center;
+  }
 }
-
-@media screen and (min-width: 720px) {
-.ebook_store_row > div#bookshelf.bookshelf {
-  float:left !important;
-}
-.ebook_store_row {
-  clear:both;
-}
-
-.ebook_store_row_2 .bookshelf {
-  margin: 0;
-  padding: 0;
-  float: left;
-  width: 50% 
-}
-.ebook_store_row_3 .bookshelf {
-  margin: 0;
-  padding: 0;
-  float: left;
-  width: 33% 
-}
-.ebook_store_row_4 .bookshelf {
-  margin: 0;
-  padding: 0;
-  float: left;
-  width: 25% 
-}
-
-}
-
 
 .ebookStoreCoupon {
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
@@ -323,5 +317,301 @@ box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 .error {
     animation: glow 1s ease-out 1;
     border-color: red !important;
+}
+
+/* Drag and drop styles */
+.ebook_store_upload {
+    position: relative;
+}
+
+.upload-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 4px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    pointer-events: none;
+}
+
+.upload-message {
+    color: #2271b1;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.upload-message .dashicons {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+}
+
+.ebook_store_upload input[type="file"]:hover + .upload-overlay,
+.ebook_store_upload input[type="file"]:focus + .upload-overlay,
+.drag-over .upload-overlay {
+    display: flex;
+}
+
+/* Delete state */
+.pending-delete {
+    opacity: 0.7;
+    position: relative;
+}
+
+.pending-delete::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.pending-delete::after {
+    content: attr(data-delete-message);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #d63638;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    z-index: 2;
+}
+
+/* Pro feature badge enhancement */
+.goPro2::after {
+    content: "Pro";
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(45deg, #2271b1, #135e96);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+/* Loading state */
+.ebook_store_file_format_item.is-uploading {
+    position: relative;
+}
+
+.ebook_store_file_format_item.is-uploading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.ebook_store_file_format_item.is-uploading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    border: 2px solid #2271b1;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+    z-index: 2;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Focus styles */
+.ebook_store_file_format_item:focus-within {
+    outline: 2px solid #2271b1;
+    outline-offset: 2px;
+}
+
+/* Accessibility improvements */
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    word-wrap: normal !important;
+}
+
+/* Enhanced tooltips */
+.ui-tooltip {
+    background: #1d2327;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    color: white;
+    font-size: 12px;
+    max-width: 200px;
+    padding: 8px 12px;
+    position: absolute;
+    z-index: 9999;
+}
+
+.ui-tooltip .arrow {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    background: #1d2327;
+    transform: rotate(45deg);
+    z-index: -1;
+}
+
+.ui-tooltip .arrow.top {
+    top: -5px;
+    left: 50%;
+    margin-left: -5px;
+}
+
+.ui-tooltip .arrow.bottom {
+    bottom: -5px;
+    left: 50%;
+    margin-left: -5px;
+}
+
+/* Animation for new files */
+@keyframes highlight {
+    0% {
+        background-color: #fff;
+    }
+    50% {
+        background-color: #f0f6fc;
+    }
+    100% {
+        background-color: #fff;
+    }
+}
+
+.ebook_store_file_format_item.new-file {
+    animation: highlight 2s ease-in-out;
+}
+
+/* Image preview styles */
+.ebook_store_image_preview {
+    position: relative;
+    margin: 10px 0;
+    max-width: 180px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.ebook_store_image_preview img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.ebook_store_image_preview.side-image {
+    max-width: 20px;
+    float: left;
+    margin-right: 10px;
+}
+
+.ebook_store_image_preview.cover-image {
+    max-width: 180px;
+}
+
+.ebook_store_image_preview.empty {
+    background: #f0f0f1;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ddd;
+}
+
+.ebook_store_image_preview.empty::before {
+    content: '\f128';
+    font-family: dashicons;
+    font-size: 24px;
+    color: #999;
+}
+
+.ebook_store_image_preview .remove-image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.ebook_store_image_preview:hover .remove-image {
+    opacity: 1;
+}
+
+.ebook_store_image_preview .remove-image:hover {
+    background: rgba(214, 54, 56, 0.9);
+}
+
+.ebook_store_image_preview .image-size {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    font-size: 11px;
+    padding: 4px 8px;
+    text-align: center;
+}
+
+.ebook_store_image_wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.ebook_store_image_wrapper::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.image-upload-hint {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+    display: block;
 }
 

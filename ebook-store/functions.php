@@ -215,7 +215,14 @@ function ebook_order_box() {
 	wp_nonce_field(plugin_basename(__FILE__), 'ebook_order_nonce');
 	$order = get_post_meta(get_the_ID(), 'ebook_order', true);
 	foreach ($fields as $f) {
-		echo "<p><label>$f</label><br /><input type=text name=\"order[$f]\" value=\"" . get_post_meta(get_the_ID(),$f,true) . "\" size=64 /></p>";
+	    $raw = get_post_meta(get_the_ID(), $f, true);
+	    printf(
+	        '<p><label>%s</label><br />
+	         <input type="text" name="order[%s]" value="%s" size="64" /></p>',
+	        esc_html( $f ),                     // escape the label
+	        esc_attr( $f ),                     // escape the field name
+	        esc_attr( $raw )                    // escape the value attribute
+	    );
 	}
 }
 
@@ -417,14 +424,23 @@ $ppcurencies = array(
 
 
 
-	$html .= '<p><b>'. __('Cover Image', 'ebook-store') . '</b> ('.__('optional', 'ebook-store').')<span class="description"> (180x260 ' . __('recommended', 'ebook-store') .')</span>' . (@$img_cover['url'] != '' ? '<br class="clear">Currently uploaded: <a href="' . @$img_cover['url'] . '">' . @basename($img_cover['url']) . '</a>' : '<br />Cover image is missing.');
-	$html .= '<br /><input name="ebook_wp_custom_attachment_cover" type="file"></p>';
-	$html .= '<p class=""><b>' . __('Ebook Preview', 'ebook-store') . '</b> ('.__('optional', 'ebook-store').')' . (@$preview['url'] != '' ? '<br class="clear">Uploaded: <a href="' . @$preview['url'] . '">' . @basename($preview['url']) . '</a><br /><label title="' . __('Delete') . '"><input type="checkbox" name="ebook_store_delete_preview"><i class="dashicons dashicons-trash"></i></label>' : '<br />Preview file is not uploaded.');
+	$html .= '<div class="ebook_store_image_wrapper">
+		<p><b>'. __('Cover Image', 'ebook-store') . '</b> ('.__('optional', 'ebook-store').')</p>
+		<span class="image-upload-hint">' . __('Recommended size:', 'ebook-store') . ' 180x260px</span>
+		' . (@$img_cover['url'] != '' ? '<a href="' . @$img_cover['url'] . '" class="hidden">' . @basename($img_cover['url']) . '</a>' : '') . '
+		<input name="ebook_wp_custom_attachment_cover" type="file" accept="image/*">
+	</div>
+
+	<div class="ebook_store_image_wrapper">
+		<p><b>' . __('Side Image', 'ebook-store') . '</b> ('.__('optional', 'ebook-store').')</p>
+		<span class="image-upload-hint">' . __('Recommended size:', 'ebook-store') . ' 20x260px</span>
+		' . (@$img_side_photo['url'] != '' ? '<a href="' . @$img_side_photo['url'] . '" class="hidden">' . @basename($img_side_photo['url']) . '</a>' : '') . '
+		<input name="ebook_wp_custom_attachment_side_photo" type="file" accept="image/*">
+	</div>
+
+	<p class=""><b>' . __('Ebook Preview', 'ebook-store') . '</b> ('.__('optional', 'ebook-store').')' . (@$preview['url'] != '' ? '<br class="clear">Uploaded: <a href="' . @$preview['url'] . '">' . @basename($preview['url']) . '</a><br /><label title="' . __('Delete') . '"><input type="checkbox" name="ebook_store_delete_preview"><i class="dashicons dashicons-trash"></i></label>' : '<br />Preview file is not uploaded.');
 	$html .= '<br /><input type="file" id="ebook_wp_custom_attachment_preview" name="ebook_wp_custom_attachment_preview" value="" size="25">';
 	$html .= '</p>';
-
-	$html .= '<p><b>' . __('Side Image', 'ebook-store') . '</b> ('.__('optional', 'ebook-store').')<span class="description"> (20x260 ' . __('recommended', 'ebook-store') .')</span>' . (@$img_side_photo['url'] != '' ? '<br class="clear">' . __('Currently uploaded', 'ebook-store') . ': <a href="' . @$img_side_photo['url'] . '">' . @basename($img_side_photo['url']) . '</a>' : '<br />Side image is missing.');
-	$html .= '<br /><input name="ebook_wp_custom_attachment_side_photo" type="file"></p>';
 	$html .= '
 <p>'.__('Author', 'ebook-store').' ('.__('optional', 'ebook-store').')<br /><select name="ebook[ebook_author][]" multiple>
 <option value="0">' . __('None', 'ebook-store') . '</option>
@@ -1335,18 +1351,18 @@ function order_custom_columns($column)
 			echo get_post_meta($post->ID,'residence_country',true);
 			break;
 		case "shipping_address":
-			$address_name = get_post_meta($post->ID,'address_name',true);
-			$address_state = get_post_meta($post->ID,'address_state',true);
-			$address_status = get_post_meta($post->ID,'address_status',true);
-			$address_country_code = get_post_meta($post->ID,'address_country_code',true);
-			$address_country = get_post_meta($post->ID,'address_country',true);
-			$address_city = get_post_meta($post->ID,'address_city',true);
-			$address_zip = get_post_meta($post->ID,'address_zip',true);
-			$address_street = get_post_meta($post->ID,'address_street',true);
-			echo "$address_name<br />$address_street<br />$address_city, $address_state, $address_zip<br />$address_country<br />Status: $address_status";
-			break;
+		    $fields = [
+		        get_post_meta($post->ID,'address_name',true),
+		        get_post_meta($post->ID,'address_street',true),
+		        get_post_meta($post->ID,'address_city',true) . ', ' . get_post_meta($post->ID,'address_state',true) . ' ' . get_post_meta($post->ID,'address_zip',true),
+		        get_post_meta($post->ID,'address_country',true),
+		        'Status: ' . get_post_meta($post->ID,'address_status',true),
+		    ];
+		    // escape and join with <br>
+		    echo implode('<br />', array_map('esc_html', $fields));
+		    break;
 		case "paypal":
-			$mail = get_post_meta($post->ID,'payer_email',true);
+			$mail = esc_attr(get_post_meta($post->ID,'payer_email',true));
 			echo "<a href=\"mailto:$mail\">$mail</a>"; //set mailto link
 			break;
 		case "downloads":
@@ -1370,7 +1386,12 @@ function order_custom_columns($column)
 			if ($data) {
 			unset($data->md5_nonce);
 				foreach ($data as $key => $value) {
-					echo "<b>$key</b>: $value<br />";
+					printf(
+				            '<b>%s</b>: %s<br />',
+				            esc_html( $key ),               // escape the field name
+				            esc_html( $value )              // escape the user-submitted value
+				        );
+
 				}
 
 			}
@@ -3668,24 +3689,22 @@ function ebook_store_not_encryptable() {
 }
 
 function ebook_store_file_formats_form($ebook_id) {
-
 	$formats = array('pdf','zip','mobi','txt','mp3','epub','mp4');
 	$meta = get_post_meta($ebook_id);
 	$ebook = new EbookStoreEbook($ebook_id);
-	//print_r($ebook->files);
 	?>
 	<div class="ebook_store_file_formats_form">
-	<?php
+		<h3><?php _e('Upload eBook Files', 'ebook-store'); ?></h3>
+		<p class="description"><?php _e('Upload your eBook in different formats. Supported formats are shown below.', 'ebook-store'); ?></p>
+		
+		<?php
 		foreach ($formats as $format) {
 			$ebook->formats = is_array($ebook->formats) ? $ebook->formats : array();
-			$exists = (@in_array($format,$ebook->formats) ? '' : 'hidden');
-			//if (!isset($ebook->files[$format])) continue;
-			if ($format == 'pdf') {
-				if (get_option('encrypt_pdf')) {
-					if (!ebook_store_encryptable($ebook->files[$format]) && @$ebook->files[$format] != '') {
-						//add_action( 'admin_notices', 'ebook_store_not_encryptable' );
-						ebook_store_not_encryptable();
-					}
+			$exists = (@in_array($format, $ebook->formats) ? '' : 'hidden');
+			
+			if ($format == 'pdf' && get_option('encrypt_pdf')) {
+				if (!ebook_store_encryptable($ebook->files[$format]) && @$ebook->files[$format] != '') {
+					ebook_store_not_encryptable();
 				}
 			}
 			@$i++;
@@ -3693,34 +3712,40 @@ function ebook_store_file_formats_form($ebook_id) {
 			<div class="ebook_store_file_format_item <?php echo ($i > 1 ? 'goPro2' : ''); ?>">
 				<div class="ebook_store_file_format_item_left">
 					<span class="ebook_store_icon">
-						<img src="<?php echo plugins_url( 'img/'.$format.'.png', __FILE__ ); ?>" width=64 />
+						<img src="<?php echo plugins_url('img/'.$format.'.png', __FILE__); ?>" alt="<?php echo strtoupper($format); ?> format" width="64" />
 					</span>
 					<span class="ebook_store_size <?php echo $exists; ?>"><?php echo $ebook->human_filesize(@$ebook->files["$format" . "_size"]); ?></span>
 				</div>
 				<div class="ebook_store_file_format_item_right">
-					<?php
-					if ($exists == '') {
-					?>
-					<span class="ebook_store_filename"><a href="#"><?php echo basename($ebook->files[$format]); ?></a></span>
-					<?php
-					} else {
-						?>
-					<span class="ebook_store_filename">File is not uploaded.</span>
-						<?php
-					}
-					?>
-					
-					<span class="ebook_store_upload"><input type="file" accept=".<?php echo $format; ?>" name="ebook_wp_custom_attachment_<?php echo $format; ?>"></span>
-					<span class="ebook_store_control <?php echo $exists; ?>">
-						<label title="<?php echo __('Delete'); ?>">
-						<input type="checkbox" name="ebook_store_delete_<?php echo $format; ?>"><i class="dashicons dashicons-trash"></i>
+					<div class="ebook_store_filename">
+						<?php if ($exists == ''): ?>
+							<a href="#" title="<?php _e('Current file', 'ebook-store'); ?>"><?php echo basename($ebook->files[$format]); ?></a>
+						<?php else: ?>
+							<span><?php _e('No file uploaded yet', 'ebook-store'); ?></span>
+						<?php endif; ?>
+					</div>
+					<div class="ebook_store_upload">
+						<input type="file" 
+							accept=".<?php echo $format; ?>" 
+							name="ebook_wp_custom_attachment_<?php echo $format; ?>"
+							id="ebook_wp_custom_attachment_<?php echo $format; ?>"
+							data-format="<?php echo $format; ?>"
+							title="<?php printf(__('Choose %s file', 'ebook-store'), strtoupper($format)); ?>"
+						/>
+					</div>
+					<div class="ebook_store_control <?php echo $exists; ?>">
+						<label title="<?php _e('Delete file', 'ebook-store'); ?>">
+							<input type="checkbox" name="ebook_store_delete_<?php echo $format; ?>" />
+							<i class="dashicons dashicons-trash"></i>
+							<span class="screen-reader-text"><?php _e('Delete file', 'ebook-store'); ?></span>
 						</label>
-					</span>
+					</div>
 				</div>
 			</div>
 			<?php
 		}
-	?>
+		?>
+		<p class="description"><?php _e('Maximum upload file size:', 'ebook-store'); ?> <?php echo ini_get('upload_max_filesize'); ?>B</p>
 	</div>
 	<?php
 }
