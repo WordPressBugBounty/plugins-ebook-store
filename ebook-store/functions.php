@@ -3762,7 +3762,7 @@ function ebook_store_price_plus_vat($price) {
 
 
 function ebook_store_row( $atts, $content = "") {
-	return "<div class=\"ebook_store_row ebook_store_row_".$atts['col']."\">" . do_shortcode($content) . "</div>";
+	return "<div class=\"ebook_store_row ebook_store_row_".intval($atts['col'])."\">" . do_shortcode($content) . "</div>";
 }
 
 function ebook_store_silent_registration($data) {
