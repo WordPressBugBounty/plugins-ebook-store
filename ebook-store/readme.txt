@@ -3,7 +3,7 @@ Contributors: motov.net
 Tags: paypal, ebook, pdf, digital downloads, stripe, epub, ebooks, paid, downloads, qr code, sell ebook, pdf drm, watermark, encrypt, pdf, mobi, sell ebooks, donate, free, mailchimp, woocommerce, files, affiliates, viewerjs, sell, credit cards, gated content, lead generation, apple pay
 Requires at least: 3.5.1
 Tested up to: 6.8.1
-Stable tag: 5.8010
+Stable tag: 5.8011
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -131,7 +131,15 @@ The plugin can disable printing, apply watermark with buyer's information on eac
 14. WooCommerce download table for the ebook(s) in the cart. Users can buy multiple ebooks with WooCommerce shopping cart and Ebook Store plugin.
 
 
+= How can I report security bugs? =
+
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team helps validate, triage and handle any security vulnerabilities. [Report a security vulnerability.]( https://patchstack.com/database/vdp/1205b489-cf87-4d64-ab01-827d86b87a7a )
+
+
 == Changelog ==
+
+= 5.8011 =
+* Added Patchstack bug tracking
 
 = 5.8006 =
 * Added Elementor compatibility

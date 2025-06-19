@@ -7,7 +7,7 @@ Author: Shopfiles Ltd
 Text Domain: ebook-store
 Domain Path: /languages
 Author URI:https://www.shopfiles.com/index.php/products/wordpress-ebook-store
-Version: 5.8010
+Version: 5.8011
 License: GPLv2
 */
 
