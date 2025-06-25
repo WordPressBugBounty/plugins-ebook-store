@@ -427,14 +427,14 @@ $ppcurencies = array(
 	$html .= '<div class="ebook_store_image_wrapper">
 		<p><b>'. __('Cover Image', 'ebook-store') . '</b> ('.__('optional', 'ebook-store').')</p>
 		<span class="image-upload-hint">' . __('Recommended size:', 'ebook-store') . ' 180x260px</span>
-		' . (@$img_cover['url'] != '' ? '<a href="' . @$img_cover['url'] . '" class="hidden">' . @basename($img_cover['url']) . '</a>' : '') . '
+		' . (@$img_cover['url'] != '' ? '<a href="' . @$img_cover['url'] . '" class="hiddenEbookStore">' . @basename($img_cover['url']) . '</a>' : '') . '
 		<input name="ebook_wp_custom_attachment_cover" type="file" accept="image/*">
 	</div>
 
 	<div class="ebook_store_image_wrapper">
 		<p><b>' . __('Side Image', 'ebook-store') . '</b> ('.__('optional', 'ebook-store').')</p>
 		<span class="image-upload-hint">' . __('Recommended size:', 'ebook-store') . ' 20x260px</span>
-		' . (@$img_side_photo['url'] != '' ? '<a href="' . @$img_side_photo['url'] . '" class="hidden">' . @basename($img_side_photo['url']) . '</a>' : '') . '
+		' . (@$img_side_photo['url'] != '' ? '<a href="' . @$img_side_photo['url'] . '" class="hiddenEbookStore">' . @basename($img_side_photo['url']) . '</a>' : '') . '
 		<input name="ebook_wp_custom_attachment_side_photo" type="file" accept="image/*">
 	</div>
 
@@ -3051,14 +3051,15 @@ function woocommerce_ebook_store_price_field() {
 		jQuery( document ).ready( function() {
 			jQuery( '.options_group.pricing' ).addClass( 'show_if_ebook_store' ).show();
 			jQuery( '.general_options' ).show();
-			jQuery(	'label[for="_virtual"]').show().addClass( 'show_if_ebook_store' ).show();;
-			jQuery(	'label[for="_downloadable"]').show().addClass( 'show_if_ebook_store' ).show();;
-		});
-		jQuery( '#product-type' ).change( function(e) {
-			jQuery( '.general_options' ).show();
-			setTimeout(500,"jQuery('label[for=\"_virtual\"]').show();jQuery('label[for=\"_downloadable\"]').show(); ");
+			jQuery('label[for="_virtual"]').show().addClass('show_if_ebook_store');
+			jQuery('label[for="_downloadable"]').show().addClass('show_if_ebook_store');
 
-			
+		});
+		jQuery('#product-type').on('change', function () {
+		    jQuery('.general_options').show();
+		    setTimeout(function () {
+		        jQuery('label[for="_virtual"], label[for="_downloadable"]').show();
+		    }, 500);
 		});
 		
 	</script><?php
@@ -3700,7 +3701,7 @@ function ebook_store_file_formats_form($ebook_id) {
 		<?php
 		foreach ($formats as $format) {
 			$ebook->formats = is_array($ebook->formats) ? $ebook->formats : array();
-			$exists = (@in_array($format, $ebook->formats) ? '' : 'hidden');
+			$exists = (@in_array($format, $ebook->formats) ? '' : 'hiddenEbookStore');
 			
 			if ($format == 'pdf' && get_option('encrypt_pdf')) {
 				if (!ebook_store_encryptable($ebook->files[$format]) && @$ebook->files[$format] != '') {

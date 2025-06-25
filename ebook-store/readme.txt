@@ -3,7 +3,7 @@ Contributors: motov.net
 Tags: paypal, ebook, pdf, digital downloads, stripe, epub, ebooks, paid, downloads, qr code, sell ebook, pdf drm, watermark, encrypt, pdf, mobi, sell ebooks, donate, free, mailchimp, woocommerce, files, affiliates, viewerjs, sell, credit cards, gated content, lead generation, apple pay
 Requires at least: 3.5.1
 Tested up to: 6.8.1
-Stable tag: 5.8011
+Stable tag: 5.8012
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,10 @@ If you use WooCommerce integration from the Pro version:
 6. Email delivery will also work with WooCommerce and the customer will receive the ebook via email as a link and/or attachment.
 
 == Frequently Asked Questions ==
+
+= How can I report security bugs? =
+
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team helps validate, triage and handle any security vulnerabilities. [Report a security vulnerability.]( https://patchstack.com/database/vdp/1205b489-cf87-4d64-ab01-827d86b87a7a )
 
 = What is the flow? How do I use this? Is there a quick guide? =
 
