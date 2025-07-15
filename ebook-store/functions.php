@@ -2440,14 +2440,50 @@ function ebook_store_formContent() {
 	}
 }
 function ebook_store_save_form($md5_nonce, $data) {
-foreach ($data as $k => $v) {
-			@$json[$k] = $v; 
-		}
-		$json = json_encode($json);
-		file_put_contents(get_temp_dir() . '/ebook_store_form_' . $md5_nonce , $json);
-		header("HTTP/1.1 200 OK");
-		die();
+    // Sanitize and validate the filename
+    $filename = 'ebook_store_form_' . sanitize_file_name($md5_nonce) . '.json';
+
+    // Prevent path traversal
+    if (strpos($filename, '..') !== false) {
+        header("HTTP/1.1 400 Bad Request");
+        die(__('Invalid filename.', 'ebook-store'));
+    }
+
+    // Determine upload path
+    $upload_dir = wp_upload_dir();
+    $target_dir = trailingslashit($upload_dir['basedir']) . 'ebook_store_data/';
+    
+    // Create directory if it doesn't exist
+    if (!file_exists($target_dir)) {
+        wp_mkdir_p($target_dir);
+    }
+
+    $file_path = $target_dir . $filename;
+
+    // Prepare and encode data
+    $json = [];
+    foreach ($data as $k => $v) {
+        $json[sanitize_text_field($k)] = sanitize_text_field($v);
+    }
+    $json_data = json_encode($json);
+
+    // File type validation
+    $validate = wp_check_filetype($file_path);
+    if ($validate['type'] === false) {
+        header("HTTP/1.1 400 Bad Request");
+        die(__('File type is not allowed.', 'ebook-store'));
+    }
+
+    // Save the data
+    if (file_put_contents($file_path, $json_data) === false) {
+        header("HTTP/1.1 500 Internal Server Error");
+        die(__('Failed to write file.', 'ebook-store'));
+    }
+
+    header("HTTP/1.1 200 OK");
+    die(__('Form data saved successfully.', 'ebook-store'));
 }
+
 function ebook_store_get_form($md5_nonce){ 
 	//error_log('TEMP dir ' . get_temp_dir());
 	@$formData = file_get_contents(get_temp_dir() . '/ebook_store_form_' . $md5_nonce);
