@@ -2,7 +2,11 @@
 // error_reporting(E_ALL);
 
 // Handle form submission
-if (isset($_POST['action']) && $_POST['action'] === 'add_order' && isset($_POST['data'])) {
+if (
+    isset($_POST['action'], $_POST['data'], $_POST['ebook_add_order_nonce']) &&
+    $_POST['action'] === 'add_order' &&
+    wp_verify_nonce($_POST['ebook_add_order_nonce'], 'ebook_add_order_action')
+) {
     $clean_data = [];
 
     // Sanitize user input
@@ -82,4 +86,6 @@ wp_reset_postdata();
     
     <h4><?php esc_html_e('"Thank you" email will be sent immediately with the download links for the ebook. If encryption is enabled, the file will be encrypted.', 'ebook-store'); ?></h4>
     <input type="hidden" name="action" value="add_order" />
+    <?php wp_nonce_field('ebook_add_order_action', 'ebook_add_order_nonce'); ?>
+
 </form>
