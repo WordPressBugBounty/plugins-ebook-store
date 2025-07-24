@@ -7,7 +7,7 @@ Author: Shopfiles Ltd
 Text Domain: ebook-store
 Domain Path: /languages
 Author URI:https://www.shopfiles.com/index.php/products/wordpress-ebook-store
-Version: 5.8014
+Version: 5.8015
 License: GPLv2
 */
 
@@ -342,7 +342,7 @@ add_action( 'init', 'ebook_store_my_taxonomies_product', 0 );
 add_action('init','ebook_store_redirect_add_new', 1);
 
 function ebook_store_redirect_add_new() {
-	if ($_SERVER['REQUEST_URI'] == '/wp-admin/post-new.php?post_type=ebook_order') {
+	if (esc_url_raw($_SERVER['REQUEST_URI']) == '/wp-admin/post-new.php?post_type=ebook_order') {
 		wp_die('<script>window.location = "edit.php?post_type=ebook&page=ebook-store-add-order-page"; </script>');
 	}
 }

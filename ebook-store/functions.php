@@ -862,7 +862,7 @@ function ebook_store( $atts, $buyNowOnly = false ){
 				$loop->the_post();	
 				$ebook_key = get_post_meta(get_the_ID(), 'ebook_key', true);
 				$_REQUEST['ebook_key'] = $ebook_key;
-				$uri = $_SERVER['REQUEST_URI'];
+				$uri = esc_url_raw($_SERVER['REQUEST_URI']);
 				$uri = remove_query_arg('ebook_key',$uri);
 				die("<script> if (window.location != window.parent.location) { window.parent.location = '".add_query_arg('ebook_key',$ebook_key)."'; } else { window.location = '".add_query_arg('ebook_key',$ebook_key)."'; }</script>");
 				echo get_the_ID() . '<br />';
@@ -1967,7 +1967,7 @@ function ebook_process_download($data = false) {
 			update_post_meta($post_id,'ebook_key',$md5_nonce);
 			update_post_meta($post_id,'downloads',1);
 			update_post_meta($post_id,'formData',wp_slash($formData));
-			update_post_meta($post_id,'downloadlink',"http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
+update_post_meta($post_id, 'downloadlink', 'http://' . sanitize_text_field($_SERVER['HTTP_HOST']) . esc_url_raw($_SERVER['REQUEST_URI']));
 			update_post_meta($post_id,'ebook',(int)$_REQUEST['p']);
 			update_post_meta($post_id,'item_name',$item_name);
 			update_post_meta($post_id,'payer_email',(@$data['payer_email'] != '' ? $data['payer_email'] : 'N/A'));
@@ -3703,7 +3703,7 @@ function ebook_store_encryptable($file) {
 }
 
 function ebook_store_offer_tutorial() {
-	if (ebook_store_endsWith($_SERVER['REQUEST_URI'], 'edit.php?post_type=ebook')) {
+	if (ebook_store_endsWith(esc_url_raw($_SERVER['REQUEST_URI']), 'edit.php?post_type=ebook')) {
 		$args = array(
 	   'post_type' => 'ebook',
 	);
@@ -3884,7 +3884,7 @@ function pr_die($array) {
 	wp_die('<pre>'.print_r($array,true).'</pre>');
 }
 function ebook_store_redirect_add_order() {
-	if (endswith($_SERVER['REQUEST_URI'], 'post-new.php?post_type=ebook_order')) {
+	if (endswith(esc_url_raw($_SERVER['REQUEST_URI']), 'post-new.php?post_type=ebook_order')) {
 		header("Location: edit.php?post_type=ebook&page=ebook-store-add-order-page");
 	}
 }
@@ -3942,7 +3942,7 @@ function ebook_store_wp_super_cache_warning() {
 ?>
 <div id="wpsc-index-warning" class="error notice" style="padding: 10px 10px 50px 10px"><h1>Warning!</h1><p>You are using WP Super Cache, in order to have <b>ebook store</b> working properly with it, you must add these lines to the "Ignore strings" section <a href="options-general.php?page=wpsupercache&tab=settings">here</a>. Exactly where it says "Add here strings (not a filename) that forces a page not to be cached.". The lines you must add are:<br /><textarea>ipn
 ebook
-</textarea></p><a id="wpsc-dismiss" href="<?php echo $_SERVER['REQUEST_URI']; ?>&dismiss=wpsc">Dismiss</a></div>
+</textarea></p><a id="wpsc-dismiss" href="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>&dismiss=wpsc">Dismiss</a></div>
 <?php
 
 	}
